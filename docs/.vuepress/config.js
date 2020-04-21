@@ -17,9 +17,16 @@ module.exports = {
         title: 'css',
         collapsable: false,
         children: [
-          '/css/transform'
+          '/css/transform',
         ],
       },
+      {
+        title: '浏览器渲染原理',
+        collapsable: false,
+        children: [
+          '/browser/eventloop'
+        ]
+      }
     ],
     lastUpdated: 'Last Updated',
   },
