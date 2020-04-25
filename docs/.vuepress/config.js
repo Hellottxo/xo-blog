@@ -10,7 +10,7 @@ module.exports = {
     logo: '/logo.svg',
     nav: [
       { text: 'Github', link: 'https://github.com/Hellottxo' },
-      { text: 'XO-UI', link: 'http://xo.silenttt.top/xo-blog' },
+      { text: 'XO-UI', link: 'http://xo.silenttt.top/xo-ui' },
     ],
     sidebar: [
       {

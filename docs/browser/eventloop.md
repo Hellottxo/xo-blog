@@ -46,7 +46,7 @@ validate(); // 502
 
 答案已经呼之欲出了：定时器设置的时间过后，`setTimeout`的回调函数放入事件队列后，等待调用栈执行的这段时间，造成了定时器执行的误差。
 
-让我们更加深入一点，借用一下Jake Archibald的例子。
+让我们更加深入一点，借用一下[Jake Archibald](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/)的例子。
 
 ```javascript
 console.log('script start');
