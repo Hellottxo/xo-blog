@@ -21,7 +21,7 @@ module.exports = {
         ],
       },
       {
-        title: '浏览器渲染原理',
+        title: '浏览器',
         collapsable: false,
         children: [
           '/browser/eventloop'
