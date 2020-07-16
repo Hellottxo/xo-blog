@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+    - 10
+script:
+    - node generate.js
+after_success:
+    - git config --global user.name "hellottxo"
+    - git config --global user.email "654720416@qq.com"
+    - git add README.md
+    - git commit -m 'docs📝 generate README'
+    - git push --force "https://${GITHUB_TOKEN}@${GH_REF}" origin HEAD:master
+env:
+  global:
+    - GH_REF: github.com/Hellottxo/leetcode-records.git
