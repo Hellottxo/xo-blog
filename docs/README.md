@@ -2,7 +2,7 @@
 home: true
 heroImage: /logo.svg
 heroText: XO'S BLOG
-tagline: 一步一个🐷脚印
+tagline: 多问问为什么🐷
 actionText: Hello World →
 actionLink: /css/transform
 footer: I'm the hero of interest

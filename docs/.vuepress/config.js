@@ -14,6 +14,16 @@ module.exports = {
     ],
     sidebar: [
       {
+        title: 'js',
+        collapsable: false,
+        children: [
+          '/js/handleWrite',
+          '/js/variable',
+          '/js/prototype',
+          '/js/this'
+        ]
+      },
+      {
         title: 'css',
         collapsable: false,
         children: [
@@ -25,6 +35,14 @@ module.exports = {
         collapsable: false,
         children: [
           '/browser/eventloop'
+        ]
+      },
+      {
+        title: '算法',
+        collapsable: false,
+        children: [
+          '/algorithm/sort',
+          '/algorithm/subject'
         ]
       }
     ],
