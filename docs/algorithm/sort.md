@@ -90,7 +90,7 @@
 
   ```js
   function quickSort(arr) {
-    if (arr.length <= 1) return arr;
+    if (arr.length < 2) return arr;
     const middleIndex = ~~(arr.length / 2);
     const middleValue = arr.splice(middleIndex, 1);
     const left = [];

@@ -173,7 +173,7 @@ console.log(obj2.name); // 'Betty'
 
 `apply()`/`call()`选手获胜！💯
 
-再来看看**作为构造函数调用**和**使用`apply()`/`call()`调用**两者的比较。因为`new`操作符和`call()`/`apply()`无法一起使用，我们用`bind()`来进行比较。
+再来看看**作为构造函数调用**和**使用`apply()`/`call()`调用**两者的比较。因为`new`操作符和`call()`/`apply()`无法一起使用，我们使用功能相似的`bind()`来进行比较。
 
 ```js
 function setName(name) {
