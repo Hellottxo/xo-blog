@@ -35,7 +35,7 @@ Function.prototype.myBind = function(context, ...defaultArgs) {
     context = Object(context) || window;
     const self = this;
     function fn(...args) {
-        // 传入的thisArgs使用了new操作符时，this指向其实例
+        // 使用了new操作符时，this指向其实例
         return self.call(this instanceof fn ? this : context, ...defaultArgs, ...args);
     }
     fn.prototype = this.prototype;
@@ -43,7 +43,7 @@ Function.prototype.myBind = function(context, ...defaultArgs) {
 }
 ```
 ## 4. 手写new
-`new`操作符实际上会经历以下四个步骤：
+`new`操作符实际上会经历以下三个步骤：
 1. 以构造函数为原型创建新的对象
 2. 以obj为context，执行构造函数（因此this指向新对象）
 3. 执行构造函数的返回值如果是引用类型，则返回该结果，如果不是或没有返回值则返回新对象
