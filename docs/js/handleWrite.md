@@ -38,10 +38,7 @@ Function.prototype.myBind = function(context, ...defaultArgs) {
         // 传入的thisArgs使用了new操作符时，this指向其实例
         return self.call(this instanceof fn ? this : context, ...defaultArgs, ...args);
     }
-    // 使用原型继承的方式改变fn的原型指向
-    function tool() { };
-    tool.prototype = self.prototype;
-    fn.prototype = new tool();
+    fn.prototype = Object.create(self);
     return fn;
 }
 ```
@@ -49,7 +46,7 @@ Function.prototype.myBind = function(context, ...defaultArgs) {
 `new`操作符实际上会经历以下四个步骤：
 1. 以构造函数为原型创建新的对象
 2. 以obj为context，执行构造函数（因此this指向新对象）
-3. 返回新对象
+3. 执行构造函数的返回值如果是引用类型，则返回该结果，如果不是或没有返回值则返回新对象
 
 ```js
 function myNew(func, ...args) {
@@ -57,8 +54,8 @@ function myNew(func, ...args) {
     const obj = Object.create(func.prototype);
     // 2. 以obj为context，执行func
     const res = func.call(obj, ...args);
-    // 3. res是原型属性则返回res，不是则返回新建对象obj
-    return res instanceof func ? res : obj;
+    // 3. res是否是引用类型，不是则返回新建对象obj
+    return res instanceof Object ? res : obj;
 }
 ```
 ## 5. 手写instanceof
