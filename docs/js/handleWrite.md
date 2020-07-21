@@ -38,7 +38,7 @@ Function.prototype.myBind = function(context, ...defaultArgs) {
         // 传入的thisArgs使用了new操作符时，this指向其实例
         return self.call(this instanceof fn ? this : context, ...defaultArgs, ...args);
     }
-    fn.prototype = Object.create(self);
+    fn.prototype = this.prototype;
     return fn;
 }
 ```

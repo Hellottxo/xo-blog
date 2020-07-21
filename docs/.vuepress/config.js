@@ -17,10 +17,11 @@ module.exports = {
         title: 'js',
         collapsable: false,
         children: [
-          '/js/handleWrite',
+          '/js/this',
           '/js/variable',
           '/js/prototype',
-          '/js/this'
+          '/js/inheritance',
+          '/js/handleWrite',
         ]
       },
       {
