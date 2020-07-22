@@ -12,7 +12,7 @@ Js变量包含**基本类型**和**引用类型**。
 | String    | RegExp                  |
 | Number    | Math（单体内置类型）    |
 | Symbol    | Global（单体内置类型）  |
-|           | Boolean（基本包装类型） |
+| BigInt    | Boolean（基本包装类型） |
 |           | Number（基本包装类型）  |
 |           | String（基本包装类型）  |
 
@@ -40,7 +40,7 @@ Js变量包含**基本类型**和**引用类型**。
 
 ## 4.  为什么`typeof null === 'object'`
 
-`typeof`会将内存中二进制的前三位判断为`object`，而null用二进制表示全为0，因此将`null`错误的判断为`object`。
+`不同的对象在底层都表示为二进制，`typeof`会将二进制的前三位为0判断为`object`，而null用二进制表示全为0，因此将`null`错误的判断为`object`。
 
 | 二进制判断依据 | 类型 |
 | -------------- | ---- |
