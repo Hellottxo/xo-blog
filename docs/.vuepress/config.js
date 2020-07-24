@@ -22,6 +22,7 @@ module.exports = {
           '/js/prototype',
           '/js/inheritance',
           '/js/handleWrite',
+          '/js/promise'
         ]
       },
       {
