@@ -9,7 +9,7 @@ Promise对象接受一个带有`resolve`和`reject`参数的函数，函数内�
 3. rejected: 完成状态，操作失败，一定有一个原型，状态不可再变化。
 ![promiseStatus](../assets/promise.png)
 ```js
-class myPromise {
+class Promise {
     constructor(executor) {
         this.state = 'pending';
         this.value = null;
@@ -34,7 +34,7 @@ class myPromise {
     }
 }
 ```
-## then方法
+## then()
 一个Promise对象提供`then`方法来访问其现在或最终的结果(或失败的原因)。 
 ```js
 promise.then(onFulfilled, onRejected);
@@ -44,7 +44,7 @@ promise.then(onFulfilled, onRejected);
 
 - `onRejected`函数在promise状态变为rejected时调用，`onRejected`接受promise的拒绝原因作为参数。如果`onRejected`不是函数，则会被替换为`Thrower`函数。
 ```js
-class myPromise {
+class Promise {
     constructor(executor) {
         ...
         this.resolveCallBacks = [];
@@ -92,7 +92,7 @@ promise2 = promise1.then(onFulfilled, onRejected);
 - 返回一个rejected状态的promise，`promise2`也是rejected状态，并接受`promise1`的`onRejected`回调函数参数值作为`onRejected`回调函数的参数。  
 [Promise / A+](https://promisesaplus.com/)规范中提供了Promise相互嵌套的操作的过程，依照规范，继续完善我们的promise。
 ```js
-class myPromise {
+class Promise {
     constructor(executor) {
         ...
     }
@@ -133,7 +133,7 @@ class myPromise {
         }
     }
     then = (onFulfilled, onRejected) => {
-        const promise2 = new myPromise((resolve, reject) => {
+        const promise2 = new Promise((resolve, reject) => {
             if (this.state === 'fulfilled') {
                 const x = onFulfilled(this.value);
                 this.resolvePromise(promise2, x, resolve, reject);
@@ -157,11 +157,43 @@ class myPromise {
     }
 }
 ```
-## 总结
-Promise就像一个装着程序的箱子，我们不需要关注程序在箱子内的状态，程序完成或失败后总会自动打开告知我们执行的结果。
-
+## catch()
+>`catch()`方法返回一个Promise，并且处理拒绝的情况。  
 ```js
-class myPromise {
+class Promise {
+    ...
+    catch = (onRejected) => this.then(undefined, onRejected);
+}
+```
+## Promise.all()
+>`Promise.all(iterable)`方法返回一个promise实例，`iterable`内所有的promise都resolve，或不包含promise对象时，该promise实例resolve，以`iterable`内所有返回值为数组作为value；任一个promise reject时，该实例reject，以第一个失败的promise reason作为reson。
+```js
+class Promise {
+    static all = (list) => {
+        return Promise((resolve, reject) => {
+            const values = [];
+            values.forEach((item, i) => {
+                if (item && typeof item.then === 'function') {
+                    item.then((res) => {
+                        values[i] = res;
+                        if (i === list.length) {
+                            resolve(values);
+                        }
+                    }, reject)
+                } else {
+                    values[i] = item;
+                }
+            })
+        })
+    }
+}
+```
+## 总结
+Promise就像一个装着程序的箱子，我们不需要关注程序在箱子内运行的过程，程序完成或失败后总会自动打开告知我们执行的结果。同时，为了方便内部程序井然有序的运行，Promise定义了三种箱子的状态：初始、完成、失败。`then`方法的链式调用，就像大箱子套小箱子。而通过这三种状态，完成箱子内部逻辑的自洽，满足箱子之间的相互嵌套。  
+
+完整的promise实现代码如下：
+```js
+class Promise {
     constructor(executor) {
         this.resolveCallBacks = [];
         this.rejectCallBacks = [];
@@ -180,6 +212,25 @@ class myPromise {
             }
         };
     }
+
+    static all = (list) => {
+        return Promise((resolve, reject) => {
+            const values = [];
+            values.forEach((item, i) => {
+                if (item && typeof item.then === 'function') {
+                    item.then((res) => {
+                        values[i] = res;
+                        if (i === list.length) {
+                            resolve(values);
+                        }
+                    }, reject)
+                } else {
+                    values[i] = item;
+                }
+            })
+        })
+    }
+
     resolvePromise = (promise, x, resolve, reject) => {
         if (promise === x) {
             return reject(new TypeError('Chaining cycle detected for promise'));
@@ -211,7 +262,7 @@ class myPromise {
         }
     }
     then = (onFulfilled, onRejected) => {
-        const promise2 = new myPromise((resolve, reject) => {
+        const promise2 = new Promise((resolve, reject) => {
             if (this.state === 'fulfilled') {
                 const x = onFulfilled(this.value);
                 this.resolvePromise(promise2, x, resolve, reject);
