@@ -36,7 +36,8 @@ module.exports = {
         title: '浏览器',
         collapsable: false,
         children: [
-          '/browser/eventloop'
+          '/browser/eventloop',
+          '/browser/cache'
         ]
       },
       {
