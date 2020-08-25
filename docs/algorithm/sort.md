@@ -109,21 +109,21 @@
 和归并排序类似，只是每次拆分数组并不是左右对称拆分，而是根据数组长度，以长度不断/2为增量进行比较。
 ```js
 function shellSort(arr) {
- 		const len = arr.length;
- 		let gap = ~~(len / 2);
- 		while(gap > 0) {
- 			for (let i = gap ; i < len; i++ ) {
-        let preIndex = i - gap;
-        let compareIndex = i;
- 				while (preIndex >= 0 && arr[compareIndex] < arr[preIndex]) {
-          [arr[preIndex + gap], arr[preIndex]] = [arr[preIndex], arr[compareIndex]];
-          preIndex -= gap;
-          compareIndex = preIndex + gap;
- 				}
- 			}
- 			gap = ~~(gap / 2);
- 		}
- 		return arr;
+  const len = arr.length;
+  let gap = ~~(len / 2);
+  while(gap > 0) {
+    for (let i = gap ; i < len; i++ ) {
+      let preIndex = i - gap;
+      let compareIndex = i;
+      while (preIndex >= 0 && arr[compareIndex] < arr[preIndex]) {
+        [arr[compareIndex], arr[preIndex]] = [arr[preIndex], arr[compareIndex]];
+        preIndex -= gap;
+        compareIndex = preIndex + gap;
+      }
+    }
+    gap = ~~(gap / 2);
+  }
+  return arr;
  }
  ```
 ## 7. 堆排序
