@@ -3,7 +3,7 @@ module.exports = {
   description: '',
   base: '/xo-blog/',
   head: [
-    ['link', {rel: 'icon', href: '/logo.svg'}]
+    ['link', { rel: 'icon', href: '/logo.svg' }]
   ],
   port: 8787,
   themeConfig: {
@@ -23,7 +23,8 @@ module.exports = {
           '/js/prototype',
           '/js/inheritance',
           '/js/handleWrite',
-          '/js/promise'
+          '/js/promise',
+          '/js/implicitConversion'
         ]
       },
       {
@@ -38,7 +39,8 @@ module.exports = {
         collapsable: false,
         children: [
           '/browser/eventloop',
-          '/browser/cache'
+          '/browser/cache',
+          '/browser/reflow'
         ]
       },
       {
