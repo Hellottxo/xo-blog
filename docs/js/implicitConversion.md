@@ -1,48 +1,56 @@
 # 隐式转换
 
-## 1. (+)操作符
+## 常见的发生隐式转换的场景
+1. 使用运算符时，如(+)/(==)运算符等等
+2. if(...) / while(...)条件语句中
+
+## 常见的转换规则
+### 1. (+) 运算符
+
+**基本转换规则如下**：
+1. Number + String = Number.toString() + String
+2. Object/Array/Boolean + String = (Object/Array/Boolean).toString() + String
+3. Number + Object/Array = Number + Number((Object/Array).toString())
+4. + any = + Number(any.toString())
+5. {} + any = + any
 
 ```js
-1 + ''
-1 + '1'
++ '1'
 [] + 1
 {} + 1
 1 + {}
-1 + true
-1 + false
+{} + {}
+{} + ({})
 1 + null
-1 + undefined
-1 + NaN
-'1' + NaN
 ```
 
 <details>
 <summary>点击查看答案</summary>
 
 ```js
-1 + '' // '1'
-1 + '1' // '11'
-[] + 1 // '1'
++ '1' // 1
+[] + 1 // 1
 {} + 1 // 1
 1 + {} // '1[object Object]'
-1 + true // 2
-1 + false // 1
+{} + {} // '[object Object][object Object]'
+{} + ({}) // NaN
 1 + null // 1
-1 + undefined // NaN
 ```
 </details>
 
-1. Number + String 会将Number转换为String相加
-2. Array + String 会执行Object.prototype.toString.call(Array)
+### 2. (-) (/) (*) 运算符
 
-## 2. (-)操作符
+**(-) 运算符基本转换规则如下**：
+
+  1. Number - Object/Array/Boolean = Number - Number((Object/Array/Boolean.toString()))
+  2. Number - String = Number - Number(String)
+  3. -any = - Number(any.toString())
+  4. {} - any = - any
+
 ```js
-1 - '1'
 - '1'
 '222' - '111'
 1 - []
-[] - 1
-[] - '1'
 {} - 1
 1 - {}
 1 - true
@@ -55,17 +63,87 @@ false - 1
 <summary>点击查看答案</summary>
 
 ```js
-1 - '1'
-- '1'
-'222' - '111'
-1 - []
-[] - 1
-[] - '1'
-{} - 1
-1 - {}
-1 - true
-false - 1
-1 - null
-1 - undefined
+- '1' // -1
+'222' - '111' // 111
+1 - [] // 1
+{} - 1 // -1
+1 - {} // NaN
+1 - true // 0
+false - 1 // -1
+1 - null // 1
+1 - undefined // NaN
 ```
 </details>
+
+通常情况下，/、* 保持与(-)规律一致，但由于 /、* 需要满足两边同时有参数，否则就会报错，因此：
+```js
+{} * 1 
+// Uncaught SyntaxError: Unexpected token '*'
+{} / 1 
+// Uncaught SyntaxError: Unexpected token '/'
+```
+### 3. 比较运算符
+1. Number == any = Number == Number(any)
+
+```js
+[] == false
+[] == []
+[] >= []
+[] > []
+[] < []
+[] <= []
+[] == ''
+'0' == 0
+'0' == false
+null == false
+undefined == false
+```
+<details>
+<summary>点击查看答案</summary>
+
+```js
+[] == false // true
+[] == [] // false
+[] >= [] // true
+[] > [] // false
+[] < [] // false
+[] <= [] // true
+[] == '' // true
+'0' == 0 // true
+'0' == false // true
+null == false // false
+undefined == false // false
+```
+</details>
+
+### 4. 逻辑运算符
+```js
+1 && 2
+false && 2
+1 || 2
+false || 2
+```
+
+<details>
+<summary>点击查看答案</summary>
+
+```js
+1 && 2 // 2
+false && 2 // false
+1 || 2 // 1
+false || 2 // 2
+```
+</details>
+
+## 如何避免或巧妙利用
+
+### 避免：
+1. 使用相等运算符时，尽量使用严格相等(===)
+2. 使用类型检查
+
+### 巧妙利用：
+```js
+  const obj = { age: 18 };
+  console.log(obj ? obj.name : '1213');
+  console.log(obj.name || '1213'); // '1213'
+```
