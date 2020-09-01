@@ -23,7 +23,8 @@ module.exports = {
           '/js/inheritance',
           '/js/handleWrite',
           '/js/promise',
-          '/js/implicitConversion'
+          '/js/implicitConversion',
+          '/js/event'
         ]
       },
       {
