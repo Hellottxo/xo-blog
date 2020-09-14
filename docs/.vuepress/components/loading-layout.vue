@@ -1,6 +1,6 @@
 <template>
   <div class="loading-container">
-    <div v-for="item in loading" class="wrap">
+    <div v-for="item in loading" class="wrap"  @click="gotoTarget(item)">
       <component :is="item"/>
     </div>
   </div>
@@ -29,17 +29,26 @@ export default {
   },
   components: {
     balls: () => import('./loading/balls.vue'),
-    beanEater: () => import('./loading/bean-eater.vue'),
+    beanEater: () => import('./loading/beanEater.vue'),
     blocks: () => import('./loading/blocks.vue'),
     book: () => import('./loading/book.vue'),
     clock: () => import('./loading/clock.vue'),
     comments: () => import('./loading/comments.vue'),
     fan: () => import('./loading/fan.vue'),
-    progressIcon: () => import('./loading/progress-icon.vue'),
+    progressIcon: () => import('./loading/progressIcon.vue'),
     water: () => import('./loading/water.vue'),
     music: () => import('./loading/music.vue'),
-    progressBar: () => import('./loading/progress-bar.vue'),
-    loadingCircle: () => import('./loading/loading-circle.vue')
+    progressBar: () => import('./loading/progressBar.vue'),
+    loadingCircle: () => import('./loading/loadingCircle.vue')
+  },
+  methods: {
+    gotoTarget: (key) => {
+      console.log(key);
+      window.open(
+        `https://github.com/Hellottxo/xo-blog/blob/master/docs/.vuepress/components/loading/${key}.vue`,
+        "_blank"
+      );
+    }
   }
 };
 </script>
@@ -51,20 +60,21 @@ export default {
   margin: 25px;
 }
 .wrap {
-  height: 230px;
-  width: 230px;
+  height: 172px;
+  width: 172px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
   border-collapse: collapse;
-  background: #00bcd429;
+  background: #3f51b5;
   cursor: pointer;
   border: 3px solid #fff;
 }
 .wrap:hover {
   transform: scale(1.5);
   border: 3px solid #fff;
+  background: #3f51b5d9;
 }
 </style>
