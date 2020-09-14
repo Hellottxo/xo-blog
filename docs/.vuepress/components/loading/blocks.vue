@@ -1,7 +1,7 @@
 <template>
   <div class="blocks">
     <div v-for="item in [1, 2, 3, 8]" class="blocks-square" :style="{'--square-index': item}"/>
-    <div class="blocks-square"></div>
+    <div class="blocks-square" />
     <div v-for="item in [4, 7, 6, 5]" class="blocks-square" :style="{'--square-index': item}"/>
   </div>
 </template>

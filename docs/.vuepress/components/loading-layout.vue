@@ -8,18 +8,22 @@
 
 <script>
 export default {
+  name: 'loading-layout',
   data() {
     return {
       loading: [
-        'balls',
+        'water',
         'beanEater',
-        'blocks',
-        'book',
         'clock',
-        'comments',
+        'book',
         'fan',
+        'comments',
         'progressIcon',
-        'water'
+        'blocks',
+        'music',
+        'progressBar',
+        'balls',
+        'loadingCircle'
       ]
     };
   },
@@ -32,7 +36,10 @@ export default {
     comments: () => import('./loading/comments.vue'),
     fan: () => import('./loading/fan.vue'),
     progressIcon: () => import('./loading/progress-icon.vue'),
-    water: () => import('./loading/water.vue')
+    water: () => import('./loading/water.vue'),
+    music: () => import('./loading/music.vue'),
+    progressBar: () => import('./loading/progress-bar.vue'),
+    loadingCircle: () => import('./loading/loading-circle.vue')
   }
 };
 </script>
@@ -54,9 +61,10 @@ export default {
   border-collapse: collapse;
   background: #00bcd429;
   cursor: pointer;
+  border: 3px solid #fff;
 }
 .wrap:hover {
-  transform: scale(1.3);
+  transform: scale(1.5);
   border: 3px solid #fff;
 }
 </style>

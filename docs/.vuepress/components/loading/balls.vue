@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="balls" v-for="item in 4"></div>
+    <div class="balls" v-for="item in 4" />
   </div>
 </template>
 

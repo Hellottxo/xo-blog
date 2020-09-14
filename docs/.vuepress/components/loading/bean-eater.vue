@@ -1,11 +1,11 @@
 <template>
   <div class="container">
     <div class="eater-container">
-      <div class="eater top"></div>
-      <div class="eater bottom"></div>
+      <div class="eater top" />
+      <div class="eater bottom" />
     </div>
     <div class="bean-container">
-      <div v-for="item in 4" class="bean"></div>
+      <div v-for="item in 4" class="bean" />
     </div>
   </div>
 </template>

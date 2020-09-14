@@ -1,11 +1,11 @@
 <template>
   <div class="books">
     <div class="left">
-      <div class="pages"></div>
+      <div class="pages" />
     </div>
     <div class="right">
-      <div class="pages" v-for="item in 3" :style="{'--pages-index': item}"></div>
-      <div class="pages"></div>
+      <div class="pages" v-for="item in 3" :style="{'--pages-index': item}" />
+      <div class="pages" />
     </div>
   </div>
 </template>
