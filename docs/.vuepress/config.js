@@ -32,6 +32,7 @@ module.exports = {
         collapsable: false,
         children: [
           '/css/transform',
+          '/css/loading-animation'
         ],
       },
       {
