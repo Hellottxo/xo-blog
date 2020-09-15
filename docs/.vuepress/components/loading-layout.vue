@@ -39,7 +39,7 @@ export default {
     water: () => import('./loading/water.vue'),
     music: () => import('./loading/music.vue'),
     progressBar: () => import('./loading/progressBar.vue'),
-    loadingCircle: () => import('./loading/loadingCircle.vue')
+    loadingCircle: () => import('./loading/loadingCircle.vue'),
   },
   methods: {
     gotoTarget: (key) => {
@@ -76,5 +76,6 @@ export default {
   transform: scale(1.5);
   border: 3px solid #fff;
   background: #3f51b5d9;
+  z-index: 222;
 }
 </style>
