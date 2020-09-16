@@ -15,6 +15,7 @@ export default {
         'water',
         'beanEater',
         'clock',
+        'cube',
         'book',
         'fan',
         'comments',
@@ -40,6 +41,7 @@ export default {
     music: () => import('./loading/music.vue'),
     progressBar: () => import('./loading/progressBar.vue'),
     loadingCircle: () => import('./loading/loadingCircle.vue'),
+    cube: () => import('./loading/cube.vue'),
   },
   methods: {
     gotoTarget: (key) => {
