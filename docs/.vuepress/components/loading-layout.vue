@@ -1,48 +1,43 @@
 <template>
   <div class="loading-container">
-    <div v-for="item in loading" class="wrap"  @click="gotoTarget(item)">
+    <div v-for="item in loading" class="wrap" @click="gotoTarget(item)">
       <component :is="item"/>
     </div>
   </div>
 </template>
 
 <script>
+const loading = [
+  'water',
+  'beanEater',
+  'clock',
+  'cube',
+  'tt',
+  'music',
+  'doubleCube',
+  'book',
+  'fan',
+  'comments',
+  'heart',
+  'progressIcon',
+  'blocks',
+  'progressBar',
+  'balls',
+  'loadingCircle'
+];
+
 export default {
   name: 'loading-layout',
   data() {
     return {
-      loading: [
-        'water',
-        'beanEater',
-        'clock',
-        'cube',
-        'book',
-        'fan',
-        'comments',
-        'progressIcon',
-        'blocks',
-        'music',
-        'progressBar',
-        'balls',
-        'loadingCircle'
-      ]
+      loading: loading
     };
   },
-  components: {
-    balls: () => import('./loading/balls.vue'),
-    beanEater: () => import('./loading/beanEater.vue'),
-    blocks: () => import('./loading/blocks.vue'),
-    book: () => import('./loading/book.vue'),
-    clock: () => import('./loading/clock.vue'),
-    comments: () => import('./loading/comments.vue'),
-    fan: () => import('./loading/fan.vue'),
-    progressIcon: () => import('./loading/progressIcon.vue'),
-    water: () => import('./loading/water.vue'),
-    music: () => import('./loading/music.vue'),
-    progressBar: () => import('./loading/progressBar.vue'),
-    loadingCircle: () => import('./loading/loadingCircle.vue'),
-    cube: () => import('./loading/cube.vue'),
-  },
+  components: (() => {
+    const map = {};
+    loading.forEach((e) => map[e] = () => import(`./loading/${e}.vue`));
+    return map;
+  })(),
   methods: {
     gotoTarget: (key) => {
       console.log(key);
