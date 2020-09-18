@@ -14,6 +14,7 @@
 .books {
   display: flex;
   width: 50px;
+  transform-style: preserve-3d;
 }
 
 .pages {

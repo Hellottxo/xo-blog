@@ -12,7 +12,7 @@ const loading = [
   'beanEater',
   'clock',
   'cube',
-  'tt',
+  'dragonfly',
   'music',
   'doubleCube',
   'book',

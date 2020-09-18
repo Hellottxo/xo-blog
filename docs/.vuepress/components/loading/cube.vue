@@ -40,17 +40,8 @@ export default {
   animation: spin 2s linear infinite;
 }
 @keyframes spin {
-  25% {
-    transform: rotate3d(0, 1, 0, 45deg);
-  }
-  50% {
-    transform: rotate3d(0, 1, 0, 90deg);
-  }
-  75%{
-    transform: rotate3d(0, 1, 0, 135deg);
-  }
   100% {
-    transform: rotate3d(0, 1, 0, 180deg);
+    transform: rotate3d(0, 1, 0, 360deg);
   }
 }
 .cube {

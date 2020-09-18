@@ -30,18 +30,19 @@ export default {
 <style scoped>
 .container {
   perspective: 400px;
+  transform-style: preserve-3d;
 }
 .cube-box {
+  transform-style: preserve-3d;
   position: relative;
   height: 40px;
   width: 40px;
-  transform-style: preserve-3d;
-  transform: rotateX(-33.5deg) rotateY(45deg);
+  --base-transform: rotateX(-33.5deg) rotateY(45deg) rotateZ(0deg);
+  transform: var(--base-transform);
   animation: spin 2s linear infinite;
-  z-index: 2;
 }
 .cube-box-inner {
-  transform: scale3d(0.5, 0.5, 0.5) rotateX(-33.5deg) rotateY(45deg);
+  transform: scale3d(0.5, 0.5, 0.5) var(--base-transform);
   position: absolute;
   bottom: 0;
   left: 0;
