@@ -21,6 +21,7 @@ const loading = [
   'heart',
   'progressIcon',
   'blocks',
+  'global',
   'progressBar',
   'balls',
   'loadingCircle'

@@ -16,7 +16,7 @@
 .fan-bar {
   --time: calc(var(--fan-index) * 5ms);
   height: 50px;
-  width: 7px;
+  width: 8px;
   background: pink;
   position: absolute;
   transform-origin: center 43px;
