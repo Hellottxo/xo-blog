@@ -17,6 +17,7 @@ const loading = [
   'doubleCube',
   'book',
   'fan',
+  'flipball',
   'comments',
   'heart',
   'progressIcon',
