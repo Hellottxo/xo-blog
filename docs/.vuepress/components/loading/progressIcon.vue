@@ -36,7 +36,7 @@
   height: 15px;
   flex-shrink: 0;
   transform: skewX(-25deg);
-  animation: stripe-move 0.5s linear infinite;
+  animation: stripe-move .5s linear infinite;
 }
 
 .stripe-bar:first-child {
@@ -51,7 +51,7 @@
 
 .stripe-bar:nth-child(odd) {
   background: #fff;
-  opacity: 0.7;
+  opacity: .7;
 }
 
 .progress-icon-shadow {
@@ -61,7 +61,7 @@
   background: #696666;
   top: 50%;
   left: 17px;
-  opacity: 0.5;
+  opacity: .5;
   transform: skewX(30deg);
   transform-origin: center;
 }

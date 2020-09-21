@@ -1,6 +1,6 @@
 <template>
   <div class="progress">
-    <div class="progress-square"></div>
+    <div class="progress-square" />
   </div>
 </template>
 

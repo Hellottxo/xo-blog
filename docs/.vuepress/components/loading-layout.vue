@@ -8,7 +8,7 @@
 
 <script>
 const loading = [
-  'water',
+  'waterWave',
   'beanEater',
   'clock',
   'cube',
@@ -22,7 +22,7 @@ const loading = [
   'heart',
   'progressIcon',
   'blocks',
-  'global',
+  'flower',
   'progressBar',
   'balls',
   'loadingCircle'

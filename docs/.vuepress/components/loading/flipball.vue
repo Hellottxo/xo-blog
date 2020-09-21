@@ -1,9 +1,13 @@
 <template>
   <div class="container">
-    <div class="left"/>
-    <div class="right"/>
-    <div class="top"/>
-    <div class="bottom"/>
+    <div class="vertical">
+      <div class="top"/>
+      <div class="bottom"/>
+    </div>
+    <div class="tranverse">
+      <div class="left"/>
+      <div class="right"/>
+    </div>
   </div>
 </template>
 
@@ -11,81 +15,88 @@
 .container {
   height: 50px;
   width: 50px;
+}
+.vertical,
+.tranverse {
+  height: 50px;
+  width: 50px;
   border-radius: 50%;
   perspective: 300px;
-  background: pink;
-  animation: color-chg 2s linear infinite;
   transform-style: preserve-3d;
+  position: absolute;
+  box-sizing: border-box;
 }
-@keyframes color-chg {
+.vertical {
+  background: palegoldenrod;
+  animation: vertical-display 1s steps(2) infinite;
+}
+@keyframes vertical-display {
   0% {
-    background: palegoldenrod;
-  }
+    z-index: -2;
+  }  
   50% {
-    background: palegoldenrod;
+    z-index: 2;
   }
   100% {
-    background: palegoldenrod;
+    z-index: -2;
+  }
+}
+.tranverse {
+  background: palevioletred;
+  z-index: -2;
+  animation: tranverse-display 1s steps(2) infinite;
+}
+@keyframes tranverse-display {
+  0% {
+    z-index: 2;
+  }
+  50% {
+    z-index: -2;
   }
 }
 .top,
 .bottom {
+  height: 50%;
+  width: 100%;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  background: palevioletred;
+  transform-origin: center bottom;
   position: absolute;
-  width: 50px;
-  height: 25px;
-  background: palegoldenrod;
 }
 .top {
-  transform-origin: center bottom;
-  animation: spin 2s linear infinite;
-  border-radius: 25px 25px 0 0;
+  animation: vertical-flip .5s linear infinite;
 }
 .bottom {
-  bottom: 0;
-  border-radius: 0 0 25px 25px;
+  transform: rotate(180deg);
 }
-@keyframes spin {
-  0% {
-    transform: rotateX(0deg);
-    background: palegoldenrod;
-  }
-  50% {
-    transform: rotateX(-180deg);
-    background: paleturquoise;
-  }
+@keyframes vertical-flip {
   100% {
+    background: palegoldenrod;
     transform: rotateX(-180deg);
-    background: paleturquoise;
   }
 }
+
 .left,
 .right {
+  height: 100%;
+  width: 50%;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  background: palegoldenrod;
+  transform-origin: center right;
   position: absolute;
-  width: 25px;
-  height: 50px;
-  background: paleturquoise;
 }
 .left {
-  border-radius: 25px 0 0 25px;
+  animation: transverse-flip .5s linear infinite;
 }
 .right {
-  right: 0;
-  border-radius: 0 25px 25px 0;
-  transform-origin: left center;
-  animation: side-spin 2s linear infinite;
+  transform: rotate(180deg);
 }
-@keyframes side-spin {
-  0% {
-    transform: rotateY(0);
-    background: paleturquoise;
-  }
-  50% {
-    transform: rotateY(0deg);
-    background: paleturquoise;
-  }
+@keyframes transverse-flip {
   100% {
-    transform: rotateY(-180deg);
-    background: palegoldenrod;
+    background: palevioletred;
+    transform: rotateY(180deg);
   }
 }
 </style>

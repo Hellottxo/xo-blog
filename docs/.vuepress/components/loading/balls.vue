@@ -17,26 +17,27 @@
   margin: 2px;
   border-radius: 50%;
   flex-shrink: 0;
+  --base-keyframes: var(--base-keyframes);
 }
 
 .balls:nth-child(1) {
   background: #2196f3;
-  animation: circle1 1s cubic-bezier(0.27, 0.44, 0.58, 1) 0.8s infinite alternate;
+  animation: circle1 var(--base-keyframes);
 }
 
 .balls:nth-child(2) {
   background: #8bc34a;
-  animation: circle2 1s cubic-bezier(0.27, 0.44, 0.58, 1) 0.8s infinite alternate;
+  animation: circle2 var(--base-keyframes);
 }
 
 .balls:nth-child(3) {
   background: #ffc107;
-  animation: circle3 1s cubic-bezier(0.27, 0.44, 0.58, 1) 0.8s infinite alternate;
+  animation: circle3 var(--base-keyframes);
 }
 
 .balls:nth-child(4) {
   background: #ff5722;
-  animation: circle4 1s cubic-bezier(0.27, 0.44, 0.58, 1) 0.8s infinite alternate;
+  animation: circle4 var(--base-keyframes);
 }
 
 @keyframes circle1 {

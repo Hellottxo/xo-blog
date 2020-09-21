@@ -37,7 +37,8 @@ export default {
   position: relative;
   height: 40px;
   width: 40px;
-  --base-transform: rotateX(-33.5deg) rotateY(45deg) rotateZ(0deg);
+  --base-rotateX: rotateX(-33.5deg);
+  --base-transform: var(--base-rotateX) rotateY(45deg) rotateZ(0deg);
   transform: var(--base-transform);
   animation: spin 2s linear infinite;
 }
@@ -51,25 +52,25 @@ export default {
 
 @keyframes spin {
   0% {
-    transform: rotateX(-33.5deg) rotateY(45deg);
+    transform: var(--base-rotateX) rotateY(45deg);
   }
   25% {
-    transform: rotateX(-33.5deg) rotateY(-45deg);
+    transform: var(--base-rotateX) rotateY(-45deg);
   }
   100% {
-    transform: rotateX(-33.5deg) rotateY(-45deg);
+    transform: var(--base-rotateX) rotateY(-45deg);
   }
 }
 
 @keyframes inner-spin {
   0% {
-    transform: scale3d(0.5, 0.5, 0.5) rotateX(-33.5deg) rotateY(45deg);
+    transform: scale3d(0.5, 0.5, 0.5) var(--base-rotateX) rotateY(45deg);
   }
   25% {
-    transform: scale3d(0.5, 0.5, 0.5) rotateX(-33.5deg) rotateY(135deg);
+    transform: scale3d(0.5, 0.5, 0.5) var(--base-rotateX) rotateY(135deg);
   }
   100% {
-    transform: scale3d(0.5, 0.5, 0.5) rotateX(-33.5deg) rotateY(135deg);
+    transform: scale3d(0.5, 0.5, 0.5) var(--base-rotateX) rotateY(135deg);
   }
 }
 .cube, .cube-inner {
