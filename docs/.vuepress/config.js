@@ -45,6 +45,13 @@ module.exports = {
         ]
       },
       {
+        title: '计算机网络',
+        collapsable: false,
+        children: [
+          '/computerNetwork/http',
+        ]
+      },
+      {
         title: '算法',
         collapsable: false,
         children: [
