@@ -17,7 +17,7 @@
   margin: 2px;
   border-radius: 50%;
   flex-shrink: 0;
-  --base-keyframes: var(--base-keyframes);
+  --base-keyframes: 1s infinite alternate;
 }
 
 .balls:nth-child(1) {

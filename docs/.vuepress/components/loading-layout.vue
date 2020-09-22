@@ -17,14 +17,15 @@ const loading = [
   'doubleCube',
   'book',
   'fan',
-  'flipball',
   'comments',
   'heart',
   'progressIcon',
   'blocks',
   'flower',
+  'diamond',
   'progressBar',
   'balls',
+  'flipball',
   'loadingCircle'
 ];
 

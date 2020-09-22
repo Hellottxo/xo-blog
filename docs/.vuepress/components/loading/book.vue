@@ -35,7 +35,7 @@
   position: absolute;
   transform-origin: left;
   z-index: calc(4 - var(--pages-index));
-  --angle: calc(-100deg - var(--pages-index) * 30deg);
+  --angle: calc(-150deg - var(--pages-index) * 30deg);
   --time: calc((var(--pages-index) - 1) * .3s);
   animation: page-chg 1s linear var(--time) infinite;
 }
