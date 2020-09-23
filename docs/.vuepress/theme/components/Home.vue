@@ -107,7 +107,7 @@ export default {
     }
 
     h1, .description, .action {
-      margin: 2.5rem auto;
+      margin: 2rem auto;
     }
 
     .description {
@@ -127,7 +127,7 @@ export default {
       border-radius: 1.6rem;
       transition: background-color 0.1s ease;
       box-sizing: border-box;
-
+      box-shadow: 0px 0px 5px 1px #00000047;
       &:hover {
         background-color: lighten($accentColor, 10%);
       }
