@@ -18,6 +18,7 @@ const loading = [
   'book',
   'fan',
   'music',
+  'matchman',
   'comments',
   'heart',
   'progressIcon',

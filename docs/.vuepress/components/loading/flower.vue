@@ -11,13 +11,8 @@
   width: 50px;
   height: 50px;
   transform: rotateY(25deg) rotateX(-10deg);
-  animation: spin 2s linear infinite;
 }
-@keyframes spin {
-  100% {
-    transform: rotateY(25deg) rotateX(-10deg) rotate(360deg);
-  }
-}
+
 .slice {
   --angle: calc(var(--slice-index) * 45deg);
   width: 100%;
@@ -27,5 +22,12 @@
   border-radius: 50%;
   transform: rotateY(90deg) rotateX(var(--angle));
   position: absolute;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotateY(90deg) rotateX(calc(var(--angle) - 360deg));
+  }
 }
 </style>
