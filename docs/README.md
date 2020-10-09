@@ -2,7 +2,7 @@
 home: true
 heroImage: /logo.svg
 heroText: XO'S BLOG
-tagline: 多问问为什么🐷
+tagline: 多问问为什么
 actionText: Hello World →
 actionLink: /css/loading-animation
 meta:

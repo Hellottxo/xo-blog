@@ -3,6 +3,9 @@ module.exports = {
   description: '',
   base: '/xo-blog/',
   port: 8787,
+  head: [
+    ['link', {rel: 'icon', href: '/logo.svg'}]
+  ],
   themeConfig: {
     nav: [
       { text: 'Github', link: 'https://github.com/Hellottxo' },
@@ -11,7 +14,9 @@ module.exports = {
     sidebar: [
       {
         title: 'js',
+        key: 'js',
         collapsable: false,
+        sidebarDepth: 3,
         children: [
           '/js/this',
           '/js/variable',
@@ -25,7 +30,9 @@ module.exports = {
       },
       {
         title: 'css',
+        key: 'css',
         collapsable: false,
+        sidebarDepth: 3,
         children: [
           '/css/transform',
           '/css/loading-animation'
@@ -33,7 +40,9 @@ module.exports = {
       },
       {
         title: '浏览器',
+        key: 'browser',
         collapsable: false,
+        sidebarDepth: 3,
         children: [
           '/browser/eventloop',
           '/browser/cache',
@@ -42,14 +51,18 @@ module.exports = {
       },
       {
         title: '计算机网络',
+        key: 'computerNetwork',
         collapsable: false,
+        sidebarDepth: 3,
         children: [
           '/computerNetwork/http',
         ]
       },
       {
         title: '算法',
+        key: 'algorithm',
         collapsable: false,
+        sidebarDepth: 3,
         children: [
           '/algorithm/sort',
           '/algorithm/subject'

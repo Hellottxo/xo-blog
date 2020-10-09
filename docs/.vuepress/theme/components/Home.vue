@@ -1,20 +1,33 @@
 <template>
   <main class="home" aria-labelledby="main-title">
-    <div class="home-wave" v-for="item in 3" :style="{'--wave-index': 4 - item}"/>
     <header class="hero">
-      <img v-if="data.heroImage" :src="$withBase(data.heroImage)" :alt="data.heroAlt || 'hero'">
-
-      <h1 v-if="data.heroText !== null" id="main-title">{{ data.heroText || $title || 'Hello' }}</h1>
+      <h1 v-if="data.heroText !== null" id="main-title">
+        X
+        <clock/>'S BLOG
+      </h1>
 
       <p
         v-if="data.tagline !== null"
         class="description"
       >{{ data.tagline || $description || 'Welcome to your VuePress site' }}</p>
-
-      <p v-if="data.actionText && data.actionLink" class="action">
-        <NavLink class="action-button" :item="actionLink"/>
-      </p>
     </header>
+
+    <div class="tag-group">
+      <p
+        v-for="item in sidebarItems"
+        class="tag"
+        :class="{'tag-selected': item.key === selectTag }"
+        :key="item.key"
+        @click="chgHomeDisplay(item)"
+      >{{item.title}}</p>
+    </div>
+
+    <div class="text-group">
+      <div v-for="item in selectItems" class="text">
+        <NavLink :item="item"/>
+        <p class="text-footer">lastUpdated: {{ item.lastUpdated }}</p>
+      </div>
+    </div>
 
     <div v-if="data.features && data.features.length" class="features">
       <div v-for="(feature, index) in data.features" :key="index" class="feature">
@@ -31,11 +44,21 @@
 
 <script>
 import NavLink from "@theme/components/NavLink.vue";
+import clock from "../../components/loading/clock";
 
 export default {
   name: "Home",
 
-  components: { NavLink },
+  data() {
+    return {
+      selectTag: "all"
+    };
+  },
+
+  components: {
+    NavLink,
+    clock
+  },
 
   computed: {
     data() {
@@ -47,6 +70,35 @@ export default {
         link: this.data.actionLink,
         text: this.data.actionText
       };
+    },
+
+    sidebarItems() {
+      console.log(this);
+      return [{ title: "全部", key: "all" }, ...this.$themeConfig.sidebar];
+    },
+
+    selectItems() {
+      const res = [];
+      const reg = /\/.*?\//g;
+      this.$site.pages.forEach(v => {
+        if (!v.title || v.title === "Home") return;
+        const obj = { text: v.title, link: v.path, lastUpdated: v.lastUpdated };
+        if (this.selectTag === "all") {
+          res.push(obj);
+          return;
+        }
+        const match = v.path.match(reg)[0];
+        if (match && match.includes(this.selectTag)) {
+          res.push(obj);
+        }
+      });
+      return res;
+    }
+  },
+
+  methods: {
+    chgHomeDisplay(item) {
+      this.selectTag = item.key;
     }
   }
 };
@@ -56,22 +108,9 @@ export default {
 .home {
   display: block;
   height: 100vh;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x hidden
   position: relative;
-
-  &-wave {
-    background: $accentColor;
-    position: absolute;
-    width: 400vh;
-    height: 400vh;
-    top: calc(var(--wave-index) * 3vh + 70vh);
-    left: -200vh;
-    border-radius: 170vh;
-    animation: water-spin 10s linear infinite;
-    --spin-angle: calc(var(--wave-index) * 70deg);
-    transform: rotate(var(--spin-angle));
-    opacity: calc(var(--wave-index) / 3);
-  }
 
   @keyframes water-spin {
     100% {
@@ -81,9 +120,10 @@ export default {
 
   .hero {
     text-align: center;
-    position relative;
-    z-index 2;
-    margin 7rem 2rem 0;
+    position: relative;
+    z-index: 2;
+    margin: 0 0 1rem;
+    padding: 7rem 2rem 1rem;
 
     img {
       max-width: 100%;
@@ -93,17 +133,20 @@ export default {
     }
 
     img:hover {
-      animation wave-spin 2s linear infinite;
+      animation: wave-spin 2s linear infinite;
     }
 
     @keyframes wave-spin {
       100% {
-        transform rotate(360deg);
+        transform: rotate(360deg);
       }
     }
 
     h1 {
       font-size: 3rem;
+      display: flex;
+      justify-content: center;
+      transform: scale(2);
     }
 
     h1, .description, .action {
@@ -111,26 +154,80 @@ export default {
     }
 
     .description {
-      z-index 22;
+      z-index: 22;
       max-width: 35rem;
       font-size: 1.6rem;
       line-height: 1.3;
       color: lighten($textColor, 40%);
     }
+  }
 
-    .action-button {
-      display: inline-block;
-      font-size: 1.2rem;
-      background $accentColor
-      color #fff
-      padding: 0.8rem 1.6rem;
-      border-radius: 1.6rem;
-      transition: background-color 0.1s ease;
-      box-sizing: border-box;
-      box-shadow: 0px 0px 5px 1px #00000047;
-      &:hover {
-        background-color: lighten($accentColor, 10%);
-      }
+  .tag-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .tag {
+    font-size: 1rem;
+    background: $accentColor;
+    color: #fff;
+    padding: 0.5rem 0.6rem;
+    margin: 0.2rem;
+    border-radius: 0.3rem;
+    transition: background-color 0.1s ease;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 5px 1px #00000047;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &-selected {
+      background: #fff;
+      color: $accentColor;
+    }
+
+    &:hover {
+      background: lighten($accentColor, 10%);
+      color: #fff;
+    }
+  }
+
+  .text-group {
+    display: flex;
+    max-width: 48rem;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    justify-content: flex-end;
+  }
+
+  .text {
+    background: #fff;
+    width: 15rem;
+    border: 1px solid #eaecef;
+    border-radius: 0.3rem;
+    margin: 0.8rem auto;
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.122);
+    transition: all 0.3s;
+    flex-basis: 15rem;
+    flex-grow: 1;
+    margin: .3rem;
+
+    a {
+      display: block;
+      margin: 1rem;
+    }
+
+    &-footer {
+      margin: 0;
+      font-size: 0.5rem;
+      padding: 0.5rem;
+      background: #f6f6f7;
+      color: #9e9e9e;
+    }
+
+    &:hover {
+      transform: rotate(3deg);
+      max-width: 42rem;
     }
   }
 

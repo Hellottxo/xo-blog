@@ -6,15 +6,11 @@ install:
     - yarn
 script:
     - yarn build
-    
-after_success:
-    - cd docs/.vuepress/dist
-    - git init
-    - git config --global user.name "hellottxo"
-    - git config --global user.email "654720416@qq.com"
-    - git add -A
-    - git commit -m 'deploy'
-    - git push --force "https://${GITHUB_TOKEN}@${GH_REF}" master:gh-pages
-env:
-  global:
-    - GH_REF: github.com/Hellottxo/xo-blog.git
+deploy:
+    provider: pages
+    skip_cleanup: true
+    local_dir: docs/.vuepress/dist
+    github_token: $GITHUB_TOKEN
+    keep_history: true
+    on:
+    branch: master

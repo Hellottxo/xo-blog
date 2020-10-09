@@ -30,7 +30,7 @@
   top: 41px;
   position: absolute;
   border-radius: 50%;
-  box-shadow: 0px 1px 1px 0px #000000bf;
+  box-shadow: 0px 0px 1px 0px #000000bf;
 }
 
 @keyframes fan-rotate {
