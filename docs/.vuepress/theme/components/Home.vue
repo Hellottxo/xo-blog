@@ -22,12 +22,15 @@
       >{{item.title}}</p>
     </div>
 
-    <div class="text-group">
-      <div v-for="item in selectItems" class="text">
+    <transition-group name="list-complete" tag="div" class="text-group">
+      <div v-for="item in selectItems" class="text" :key="item.link">
         <NavLink :item="item"/>
-        <p class="text-footer">lastUpdated: {{ item.lastUpdated }}</p>
+        <div class="text-footer">
+          <span>{{item.lastUpdated}}</span>
+          <NavLink :item="{text: '阅 读', link: item.link}"/>
+        </div>
       </div>
-    </div>
+    </transition-group>
 
     <div v-if="data.features && data.features.length" class="features">
       <div v-for="(feature, index) in data.features" :key="index" class="feature">
@@ -109,7 +112,7 @@ export default {
   display: block;
   height: 100vh;
   overflow-y: auto;
-  overflow-x hidden
+  overflow-x: hidden;
   position: relative;
 
   @keyframes water-spin {
@@ -166,6 +169,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin: 0 0 1rem;
   }
 
   .tag {
@@ -196,21 +200,20 @@ export default {
     display: flex;
     max-width: 48rem;
     flex-wrap: wrap;
-    margin: 0 auto;
+    margin: 1rem auto;
     justify-content: flex-end;
   }
 
   .text {
-    background: #fff;
+    background: #E8F5E9;
     width: 15rem;
     border: 1px solid #eaecef;
     border-radius: 0.3rem;
-    margin: 0.8rem auto;
-    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.122);
     transition: all 0.3s;
     flex-basis: 15rem;
     flex-grow: 1;
-    margin: .3rem;
+    margin: 0.3rem;
+    position: relative;
 
     a {
       display: block;
@@ -218,16 +221,54 @@ export default {
     }
 
     &-footer {
-      margin: 0;
       font-size: 0.5rem;
-      padding: 0.5rem;
-      background: #f6f6f7;
+      margin: 0 0.8rem;
+      padding: 0.5rem 0;
       color: #9e9e9e;
+      display: flex;
+      border-top: 1px dashed;
+      justify-content space-between
+      align-items center
+
+      a {
+        margin 0
+        padding .1rem .8rem
+        background $accentColor
+        color #fff
+        border-radius .8rem
+      }
     }
 
     &:hover {
-      transform: rotate(3deg);
-      max-width: 42rem;
+      transform: rotate(1deg);
+    }
+
+    &::before {
+      content: '';
+      height: 0.8rem;
+      width: 0.4rem;
+      background: #fff;
+      position: absolute;
+      bottom: 1.8rem;
+      border-bottom-right-radius: 0.4rem;
+      border-top-right-radius: 0.4rem;
+      border: 1px solid #eaecef;
+      border-left-color: transparent;
+      left: -0.1rem;
+    }
+
+    &::after {
+      content: '';
+      height: 0.8rem;
+      width: 0.4rem;
+      background: #fff;
+      position: absolute;
+      bottom: 1.8rem;
+      border-bottom-left-radius: 0.4rem;
+      border-top-left-radius: 0.4rem;
+      border: 1px solid #eaecef;
+      border-right-color: transparent;
+      right: -0.1rem;
     }
   }
 
@@ -265,6 +306,19 @@ export default {
     text-align: center;
     color: lighten($textColor, 25%);
   }
+}
+
+.list-complete-item {
+  transition: all 1s;
+}
+
+.list-complete-enter, .list-complete-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.list-complete-leave-active {
+  position: absolute;
 }
 
 @media (max-width: $MQMobile) {

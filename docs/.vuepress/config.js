@@ -4,12 +4,13 @@ module.exports = {
   base: '/xo-blog/',
   port: 8787,
   head: [
-    ['link', {rel: 'icon', href: '/logo.svg'}]
+    ['link', { rel: 'icon', href: '/logo.svg' }]
   ],
   themeConfig: {
     nav: [
       { text: 'Github', link: 'https://github.com/Hellottxo' },
       { text: 'XO-UI', link: 'http://xo.silenttt.top/xo-ui' },
+      { text: 'leetcode-records', link: 'http://xo.silenttt.top/leetcode-records' }
     ],
     sidebar: [
       {
