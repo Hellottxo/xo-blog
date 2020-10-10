@@ -207,8 +207,7 @@ export default {
   .text {
     background: #E8F5E9;
     width: 15rem;
-    border: 1px solid #eaecef;
-    border-radius: 0.3rem;
+    border-radius: 0.5rem;
     transition: all 0.3s;
     flex-basis: 15rem;
     flex-grow: 1;
@@ -240,34 +239,33 @@ export default {
     }
 
     &:hover {
-      transform: rotate(1deg);
+      transform: translateX(.3rem);
     }
+
+    size = 0.8rem;
+    radius = size / 2;
 
     &::before {
       content: '';
-      height: 0.8rem;
-      width: 0.4rem;
+      height: size;
+      width: radius;
       background: #fff;
       position: absolute;
       bottom: 1.8rem;
-      border-bottom-right-radius: 0.4rem;
-      border-top-right-radius: 0.4rem;
-      border: 1px solid #eaecef;
-      border-left-color: transparent;
+      border-bottom-right-radius: radius;
+      border-top-right-radius: radius;
       left: -0.1rem;
     }
 
     &::after {
       content: '';
-      height: 0.8rem;
-      width: 0.4rem;
+      height: size;
+      width: radius;
       background: #fff;
       position: absolute;
       bottom: 1.8rem;
-      border-bottom-left-radius: 0.4rem;
-      border-top-left-radius: 0.4rem;
-      border: 1px solid #eaecef;
-      border-right-color: transparent;
+      border-bottom-left-radius: radius;
+      border-top-left-radius: radius;
       right: -0.1rem;
     }
   }
@@ -309,16 +307,12 @@ export default {
 }
 
 .list-complete-item {
-  transition: all 1s;
+  transition: all .2s;
 }
 
 .list-complete-enter, .list-complete-leave-to {
   opacity: 0;
-  transform: translateY(30px);
-}
-
-.list-complete-leave-active {
-  position: absolute;
+  transform: rotate(15deg);
 }
 
 @media (max-width: $MQMobile) {
