@@ -26,7 +26,8 @@ module.exports = {
           '/js/handleWrite',
           '/js/promise',
           '/js/implicitConversion',
-          '/js/event'
+          '/js/event',
+          '/js/frame'
         ]
       },
       {
@@ -37,6 +38,15 @@ module.exports = {
         children: [
           '/css/transform',
           '/css/loading-animation'
+        ],
+      },
+      {
+        title: 'html',
+        key: 'html',
+        collapsable: false,
+        sidebarDepth: 3,
+        children: [
+          '/html/h5',
         ],
       },
       {
