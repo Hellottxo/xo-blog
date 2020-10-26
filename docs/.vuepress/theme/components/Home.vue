@@ -2,35 +2,43 @@
   <main class="home" aria-labelledby="main-title">
     <header class="hero">
       <h1 v-if="data.heroText !== null" id="main-title">
-        X
-        <clock/>'S BLOG
+        <p class="title">
+          X
+          <clock/>'S BLOG
+        </p>
+        <p
+          v-if="data.tagline !== null"
+          class="description"
+        >{{ `/* ${data.tagline || $description || 'Welcome to your VuePress site'} */` }}</p>
       </h1>
-
-      <p
-        v-if="data.tagline !== null"
-        class="description"
-      >{{ data.tagline || $description || 'Welcome to your VuePress site' }}</p>
     </header>
 
-    <div class="tag-group">
-      <p
-        v-for="item in sidebarItems"
-        class="tag"
-        :class="{'tag-selected': item.key === selectTag }"
-        :key="item.key"
-        @click="chgHomeDisplay(item)"
-      >{{item.title}}</p>
-    </div>
-
-    <transition-group name="list-complete" tag="div" class="text-group">
-      <div v-for="item in selectItems" class="text" :key="item.link">
-        <NavLink :item="item"/>
-        <div class="text-footer">
-          <span>{{item.lastUpdated}}</span>
-          <NavLink :item="{text: '阅 读', link: item.link}"/>
-        </div>
+    <div class="content-container">
+      <div class="tag-group">
+        <p
+          v-for="item in sidebarItems"
+          class="tag"
+          :class="{'tag-selected': item.key === selectTag }"
+          :key="item.key"
+          @click="chgHomeDisplay(item)"
+        >{{item.title}}</p>
       </div>
-    </transition-group>
+
+      <transition-group name="list-complete" tag="div" class="text-group">
+        <div
+          v-for="(item, index) in selectItems.list"
+          class="text"
+          :key="item.link"
+          :class="{'text-selected': index < selectItems.selectCount}"
+        >
+          <NavLink :item="item"/>
+          <div class="text-footer">
+            <span>{{item.lastUpdated}}</span>
+            <NavLink :item="{text: '阅 读', link: item.link}"/>
+          </div>
+        </div>
+      </transition-group>
+    </div>
 
     <div v-if="data.features && data.features.length" class="features">
       <div v-for="(feature, index) in data.features" :key="index" class="feature">
@@ -76,26 +84,31 @@ export default {
     },
 
     sidebarItems() {
-      console.log(this);
       return [{ title: "全部", key: "all" }, ...this.$themeConfig.sidebar];
     },
 
     selectItems() {
-      const res = [];
+      const selectItems = [];
       const reg = /\/.*?\//g;
+      const otherItems = [];
       this.$site.pages.forEach(v => {
         if (!v.title || v.title === "Home") return;
         const obj = { text: v.title, link: v.path, lastUpdated: v.lastUpdated };
         if (this.selectTag === "all") {
-          res.push(obj);
+          otherItems.push(obj);
           return;
         }
         const match = v.path.match(reg)[0];
         if (match && match.includes(this.selectTag)) {
-          res.push(obj);
+          selectItems.push(obj);
+        } else {
+          otherItems.push(obj);
         }
       });
-      return res;
+      return {
+        selectCount: selectItems.length,
+        list: [...selectItems, ...otherItems]
+      };
     }
   },
 
@@ -110,10 +123,10 @@ export default {
 <style lang="stylus">
 .home {
   display: block;
-  height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
   position: relative;
+  height 100vh
 
   @keyframes water-spin {
     100% {
@@ -125,8 +138,9 @@ export default {
     text-align: center;
     position: relative;
     z-index: 2;
-    margin: 0 0 1rem;
-    padding: 7rem 2rem 1rem;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 
     img {
       max-width: 100%;
@@ -149,20 +163,37 @@ export default {
       font-size: 3rem;
       display: flex;
       justify-content: center;
-      transform: scale(2);
+      height: 100vh;
+      align-items: center;
+      margin: 0;
+      flex-direction: column;
     }
 
-    h1, .description, .action {
+    .title {
+      display: flex;
+      align-items: center;
+    }
+
+    .action {
       margin: 2rem auto;
     }
 
     .description {
       z-index: 22;
       max-width: 35rem;
-      font-size: 1.6rem;
+      font-size: 16px;
       line-height: 1.3;
-      color: lighten($textColor, 40%);
+      font-weight: normal;
+      color: $accentColor;
+      letter-spacing: 6px;
     }
+  }
+
+  $content-bgColor = #f5f5f5
+
+  .content-container {
+    height 100vh
+    background $content-bgColor
   }
 
   .tag-group {
@@ -170,6 +201,7 @@ export default {
     flex-wrap: wrap;
     justify-content: center;
     margin: 0 0 1rem;
+    padding-top 5rem
   }
 
   .tag {
@@ -198,20 +230,22 @@ export default {
 
   .text-group {
     display: flex;
-    max-width: 48rem;
+    max-width: 50rem;
     flex-wrap: wrap;
-    margin: 1rem auto;
+    margin: 1rem auto 4rem auto;
     justify-content: flex-end;
   }
 
+  base-border = 1px solid $accentColor;
+
   .text {
-    background: #E8F5E9;
+    border: base-border;
     width: 15rem;
     border-radius: 0.5rem;
     transition: all 0.3s;
     flex-basis: 15rem;
     flex-grow: 1;
-    margin: 0.3rem;
+    margin: 0.5rem;
     position: relative;
 
     a {
@@ -226,47 +260,59 @@ export default {
       color: #9e9e9e;
       display: flex;
       border-top: 1px dashed;
-      justify-content space-between
-      align-items center
+      justify-content: space-between;
+      align-items: center;
 
       a {
-        margin 0
-        padding .1rem .8rem
-        background $accentColor
-        color #fff
-        border-radius .8rem
+        margin: 0;
+        padding: 0.1rem 0.8rem;
+        background: $accentColor;
+        color: #fff;
+        border-radius: 0.8rem;
       }
     }
 
-    &:hover {
-      transform: translateX(.3rem);
-    }
-
     size = 0.8rem;
-    radius = size / 2;
+    radius = (size / 2);
 
     &::before {
       content: '';
       height: size;
       width: radius;
-      background: #fff;
+      background: $content-bgColor;
       position: absolute;
       bottom: 1.8rem;
       border-bottom-right-radius: radius;
       border-top-right-radius: radius;
-      left: -0.1rem;
+      left: -1px;
+      border-right: base-border;
+      border-top: base-border;
+      border-bottom: base-border;
+      border-left 1px solid $content-bgColor
     }
 
     &::after {
       content: '';
       height: size;
       width: radius;
-      background: #fff;
+      background: $content-bgColor
       position: absolute;
       bottom: 1.8rem;
       border-bottom-left-radius: radius;
       border-top-left-radius: radius;
-      right: -0.1rem;
+      right: -1px;
+      border-left: base-border;
+      border-top: base-border;
+      border-bottom: base-border;
+      border-right 1px solid $content-bgColor
+    }
+  }
+
+  .text-selected {
+    background: $accentColor;
+
+    a {
+      color: #fff;
     }
   }
 
@@ -307,7 +353,7 @@ export default {
 }
 
 .list-complete-item {
-  transition: all .2s;
+  transition: all 0.2s;
 }
 
 .list-complete-enter, .list-complete-leave-to {
