@@ -121,3 +121,100 @@ Array.prototype.myFilter = function(func, thisArg) {
     }, [])
 }
 ```
+## 9. 模拟Symbol
+```js
+(function() {
+    const root = this;
+    const SymbolPolyfill = function(des) {
+        // If NewTarget is not undefined, throw a TypeError exception.
+        if (this instanceof SymbolPolyfill) throw new TypeError('Symbol is not a constructor');
+        
+        // If description is undefined, let descString be undefined.
+        // Else, let descString be ToString(description).
+        const descString = des === undefined ? undefined : String(des);
+
+        // Return a new unique Symbol value whose [[Description]] value is descString.
+        const symbol = Object.create({
+            toString: () => `Symbol(${this.__Description__})`
+        });
+        Object.defineProperties(symbol, {
+            '__Description__': {
+                value: des,
+                writable: false,
+                enumerable: false,
+                configurable: false
+            }
+        });
+        return symbol;
+    }
+
+    root.SymbolPolyfill = SymbolPolyfill;
+})()
+```
+## 10. 模拟for...of
+ES6 规定，默认的 `Iterator` 接口部署在数据结构的 `Symbol.iterator` 属性。
+即，一个数据结构只要具有 `Symbol.iterator` 属性，就可以认为是“可遍历的”（iterable）。
+当使用 `for...of` 循环遍历某种数据结构时，该循环会自动去寻找 Iterator 接口。
+```js
+const forOf = (obj, callback) => {
+    const iterator = obj[Symbol.iterator];
+    if(!iterator) throw new Error(`${obj} is not iterable`);
+    let next = iterator.next();
+    while (!next.done) {
+        callback(next.value);
+        next.next();
+    }
+}
+
+```
+## 11. 模拟Set
+```js
+const isDef = (v) => v !== undefined && v !== null;
+
+const isIterator = (v) => v[Symbol.iterator];
+
+const gettype = (v) => Object.prototype.toString.call(v).slice(8, -1);
+
+const assert = (condition, msg) => {
+    if (!condition) throw new Error(msg);
+};
+
+class mySet {
+    constructor(data) {
+        this.value = [];
+        if (isDef(data)) {
+            assert(isIterotar(data), `Uncaught TypeError: ${getType(data)} is not iterable (cannot read property Symbol(Symbol.iterator))`);
+            for (let item of data) {
+                this.add(item);
+            };
+        }
+    }
+
+    get size = () => this.value.length;
+
+    add = (v) => {
+        const index = this.value.indexOf(v);
+        if (index < 0) this.value.push(v);
+        return this;
+    }
+
+    clear = (v) => {
+        this.value = [];
+    }
+
+    has = (v) => {
+        return this.value.indexOf(v) > -1;
+    }
+
+    delete = (v) => {
+        const index = this.value.indexOf(v);
+        if (index > -1) this.value.splice(index, 1);
+        return index > -1;
+    }
+
+    forEach = (callbackFn, thisArg) => {
+        thisArg = thisArg || this;
+        this.value.forEach(callbackFn, thisArg);
+    }
+}
+```

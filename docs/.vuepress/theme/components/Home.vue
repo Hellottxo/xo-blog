@@ -126,7 +126,7 @@ export default {
   overflow-y: auto;
   overflow-x: hidden;
   position: relative;
-  height 100vh
+  height: 100vh;
 
   @keyframes water-spin {
     100% {
@@ -189,11 +189,11 @@ export default {
     }
   }
 
-  $content-bgColor = #f5f5f5
+  $content-bgColor = #f5f5f5;
 
   .content-container {
-    height 100vh
-    background $content-bgColor
+    min-height: 100vh;
+    background: $content-bgColor;
   }
 
   .tag-group {
@@ -201,7 +201,7 @@ export default {
     flex-wrap: wrap;
     justify-content: center;
     margin: 0 0 1rem;
-    padding-top 5rem
+    padding-top: 5rem;
   }
 
   .tag {
@@ -232,7 +232,7 @@ export default {
     display: flex;
     max-width: 50rem;
     flex-wrap: wrap;
-    margin: 1rem auto 4rem auto;
+    margin: 1rem auto 0;
     justify-content: flex-end;
   }
 
@@ -288,14 +288,14 @@ export default {
       border-right: base-border;
       border-top: base-border;
       border-bottom: base-border;
-      border-left 1px solid $content-bgColor
+      border-left: 1px solid $content-bgColor;
     }
 
     &::after {
       content: '';
       height: size;
       width: radius;
-      background: $content-bgColor
+      background: $content-bgColor;
       position: absolute;
       bottom: 1.8rem;
       border-bottom-left-radius: radius;
@@ -304,7 +304,7 @@ export default {
       border-left: base-border;
       border-top: base-border;
       border-bottom: base-border;
-      border-right 1px solid $content-bgColor
+      border-right: 1px solid $content-bgColor;
     }
   }
 

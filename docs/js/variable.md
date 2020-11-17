@@ -93,7 +93,7 @@ Js变量包含**基本类型**和**引用类型**。
 
 [点击查看答案](./implicitConversion)
 
-### 9. `Symbol`类型在实际开发中的应用
+## 9. `Symbol`类型在实际开发中的应用，手动实现一个简单的`Symbol`
 <details>
 <summary>点击查看答案</summary>
 
@@ -101,5 +101,7 @@ Js变量包含**基本类型**和**引用类型**。
   1. 用于对象中的唯一key，防止对象中的某个key不小心被改写或覆盖。
   2. 对象中以`Symbol`为key时，`for in`、`Json.stringify`等会跳过该属性，可以用于模拟私有属性。想要读取所有属性时，可以使用Reflect.ownKeys(obj)。
   3. 消除魔法值。
+
+手动实现: [手写系列](./handleWrite)
 
 </details>
