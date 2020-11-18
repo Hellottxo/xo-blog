@@ -125,6 +125,15 @@ Array.prototype.myFilter = function(func, thisArg) {
 ```js
 (function() {
     const root = this;
+
+    const generateUniqueKey = (function() {
+        let postfix = 0;
+        return (descString) => {
+            postfix++;
+            return `@@${descString}${postfix}`;
+        }
+    })();
+
     const SymbolPolyfill = function(des) {
         // If NewTarget is not undefined, throw a TypeError exception.
         if (this instanceof SymbolPolyfill) throw new TypeError('Symbol is not a constructor');
@@ -135,7 +144,8 @@ Array.prototype.myFilter = function(func, thisArg) {
 
         // Return a new unique Symbol value whose [[Description]] value is descString.
         const symbol = Object.create({
-            toString: () => `Symbol(${this.__Description__})`
+            toString: () => this.__name__,
+            valueOf: () => this
         });
         Object.defineProperties(symbol, {
             '__Description__': {
@@ -143,10 +153,38 @@ Array.prototype.myFilter = function(func, thisArg) {
                 writable: false,
                 enumerable: false,
                 configurable: false
+            },
+            '__name__': {
+                value: generateUniqueKey(des),
+                writable: false,
+                enumerable: false,
+                configurable: false
             }
         });
         return symbol;
     }
+
+    // 用于实现`Symbol.for()`、`Symbol.keyFor()`
+    const forMap = {};
+
+    Object.defineProperties(SymbolPolyfill, {
+        for: {
+            value: (des) => {
+            const descString = des === undefined ? undefined : String(des);
+                return forMap[descString] ? forMap[descString] : forMap[descString] = SymbolPolyfill(descString);
+            },
+            writable: true,
+            enumerable: false,
+            configurable: true
+        },
+        keyFor: {
+            value: (symbol) => {
+                for(let key in forMap) {
+                    if (forMap[key] === symbol) return key;
+                }
+            }
+        }
+    })
 
     root.SymbolPolyfill = SymbolPolyfill;
 })()
