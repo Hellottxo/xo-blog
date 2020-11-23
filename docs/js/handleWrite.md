@@ -211,7 +211,7 @@ const isDef = (v) => v !== undefined && v !== null;
 
 const isIterator = (v) => v[Symbol.iterator];
 
-const gettype = (v) => Object.prototype.toString.call(v).slice(8, -1);
+const getType = (v) => Object.prototype.toString.call(v).slice(8, -1);
 
 const assert = (condition, msg) => {
     if (!condition) throw new Error(msg);
