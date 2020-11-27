@@ -6,10 +6,12 @@
           X
           <clock/>'S BLOG
         </p>
-        <p
-          v-if="data.tagline !== null"
-          class="description"
-        >{{ `/* ${data.tagline || $description || 'Welcome to your VuePress site'} */` }}</p>
+        <p v-if="data.tagline !== null" class="description">
+          /*
+          <span>{{slogan}}</span>
+          <span class="slogan">|</span>
+          */
+        </p>
       </h1>
     </header>
 
@@ -56,19 +58,29 @@
 <script>
 import NavLink from "@theme/components/NavLink.vue";
 import clock from "../../components/loading/clock";
+import { setTimeout } from "timers";
 
 export default {
   name: "Home",
 
   data() {
     return {
-      selectTag: "all"
+      selectTag: "all",
+      slogan: ""
     };
   },
 
   components: {
     NavLink,
     clock
+  },
+
+  mounted() {
+    this.setSloganAnimation();
+  },
+
+  unmouted() {
+    this.sloganInterval = null;
   },
 
   computed: {
@@ -115,6 +127,19 @@ export default {
   methods: {
     chgHomeDisplay(item) {
       this.selectTag = item.key;
+    },
+    setSloganAnimation(reverse) {
+      if (this.slogan === undefined || !this.data.tagline) return;
+      const sloganLen = this.slogan.length;
+      const taglineLen = this.data.tagline.length;
+      let flag = (reverse && sloganLen !== 0) || sloganLen === taglineLen;
+      let time = flag ? 100 : 200
+      if ((!reverse && sloganLen === taglineLen - 1) || (reverse && sloganLen === 1)) {
+        time = 600;
+      }
+      const len = flag ? sloganLen - 1 : sloganLen + 1;
+      this.slogan = this.data.tagline.slice(0, len);
+      this.sloganInterval = setTimeout(() => this.setSloganAnimation(flag), time);
     }
   }
 };
@@ -123,8 +148,6 @@ export default {
 <style lang="stylus">
 .home {
   display: block;
-  overflow-y: auto;
-  overflow-x: hidden;
   position: relative;
   height: 100vh;
 
@@ -187,9 +210,17 @@ export default {
       color: $accentColor;
       letter-spacing: 6px;
     }
+    .slogan {
+      animation cursor 0.7s infinite alternate-reverse
+    }
+    @keyframes cursor {
+      100% {
+        opacity 0
+      }
+    }
   }
 
-  $content-bgColor = #f5f5f5;
+  $content-bgColor = #f8fafc;
 
   .content-container {
     min-height: 100vh;
