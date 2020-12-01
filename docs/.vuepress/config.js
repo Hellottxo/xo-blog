@@ -27,7 +27,8 @@ module.exports = {
           '/js/promise',
           '/js/implicitConversion',
           '/js/event',
-          '/js/frame'
+          '/js/frame',
+          '/js/numInJs'
         ]
       },
       {
