@@ -1,11 +1,9 @@
-# Eventloop 事件循环
+---
+title: Eventloop 事件循环
+---
 
-从需求开始。
-
-## 为什么要了解Eventloop
-
-先举个简单的栗子🌰。
-
+从需求开始，为什么要了解Eventloop？先举个简单的栗子🌰：
+<!-- more -->
 ```javascript
 const validate = () => {
   const timeStamp = Date.now();
@@ -13,7 +11,6 @@ const validate = () => {
 }
 validate();
 ```
-
 上述的代码的运行结果是什么呢？是`500`吗？
 
 事实上，当我们尝试多次运行validate函数，会发现，`setTimeout`的回调函数打印出来的结果并不是我们想象中的500，甚至不是一个固定的数值。

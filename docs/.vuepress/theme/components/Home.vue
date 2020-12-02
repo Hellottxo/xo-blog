@@ -34,9 +34,9 @@
           :class="{'text-selected': index < selectItems.selectCount}"
         >
           <NavLink :item="item"/>
+          <span class="excerpt" v-html="item.excerpt">{{item.excerpt}}</span>
           <div class="text-footer">
             <span>{{item.lastUpdated}}</span>
-            <NavLink :item="{text: '阅 读', link: item.link}"/>
           </div>
         </div>
       </transition-group>
@@ -105,7 +105,7 @@ export default {
       const otherItems = [];
       this.$site.pages.forEach(v => {
         if (!v.title || v.title === "Home") return;
-        const obj = { text: v.title, link: v.path, lastUpdated: v.lastUpdated };
+        const obj = { text: v.title, link: v.path, lastUpdated: v.lastUpdated, excerpt: v.excerpt };
         if (this.selectTag === "all") {
           otherItems.push(obj);
           return;
@@ -220,11 +220,10 @@ export default {
     }
   }
 
-  $content-bgColor = #f8fafc;
-
   .content-container {
     min-height: 100vh;
-    background: $content-bgColor;
+    background: #f1f5f9;
+    display: flow-root;
   }
 
   .tag-group {
@@ -237,11 +236,12 @@ export default {
 
   .tag {
     font-size: 1rem;
+    width 100px
+    text-align center
     background: $accentColor;
     color: #fff;
     padding: 0.5rem 0.6rem;
     margin: 0.2rem;
-    border-radius: 0.3rem;
     transition: background-color 0.1s ease;
     box-sizing: border-box;
     box-shadow: 0px 0px 5px 1px #00000047;
@@ -260,82 +260,43 @@ export default {
   }
 
   .text-group {
-    display: flex;
     max-width: 50rem;
-    flex-wrap: wrap;
-    margin: 1rem auto 0;
-    justify-content: flex-end;
+    margin: 1rem auto;
   }
 
-  base-border = 1px solid $accentColor;
+  .excerpt * {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 14px;
+    color: #9E9E9E;
+    font-weight normal
+  }
 
   .text {
-    border: base-border;
-    width: 15rem;
     border-radius: 0.5rem;
     transition: all 0.3s;
     flex-basis: 15rem;
     flex-grow: 1;
-    margin: 0.5rem;
+    margin: 1.5rem;
     position: relative;
+    background: #fff;
+    padding: 1rem;
+    box-shadow: 2px 2px 12px 2px #F5F5F5;
 
     a {
       display: block;
-      margin: 1rem;
+      margin: 1rem 0;
     }
 
     &-footer {
       font-size: 0.5rem;
-      margin: 0 0.8rem;
-      padding: 0.5rem 0;
+      padding: 1rem 0;
       color: #9e9e9e;
       display: flex;
       border-top: 1px dashed;
       justify-content: space-between;
       align-items: center;
-
-      a {
-        margin: 0;
-        padding: 0.1rem 0.8rem;
-        background: $accentColor;
-        color: #fff;
-        border-radius: 0.8rem;
-      }
-    }
-
-    size = 0.8rem;
-    radius = (size / 2);
-
-    &::before {
-      content: '';
-      height: size;
-      width: radius;
-      background: $content-bgColor;
-      position: absolute;
-      bottom: 1.8rem;
-      border-bottom-right-radius: radius;
-      border-top-right-radius: radius;
-      left: -1px;
-      border-right: base-border;
-      border-top: base-border;
-      border-bottom: base-border;
-      border-left: 1px solid $content-bgColor;
-    }
-
-    &::after {
-      content: '';
-      height: size;
-      width: radius;
-      background: $content-bgColor;
-      position: absolute;
-      bottom: 1.8rem;
-      border-bottom-left-radius: radius;
-      border-top-left-radius: radius;
-      right: -1px;
-      border-left: base-border;
-      border-top: base-border;
-      border-bottom: base-border;
-      border-right: 1px solid $content-bgColor;
     }
   }
 

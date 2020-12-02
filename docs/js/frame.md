@@ -1,4 +1,6 @@
-# Vue/React
+---
+title: Vue/React
+---
 ## 1. React和Vue的区别
 
 ### 相似之处

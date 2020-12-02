@@ -1,6 +1,8 @@
-# 手写Promise
-Promise是异步编程的一种解决方案。 ES6将其纳入规范，提供了内置的Promise对象。  
-Promise对象是异步操作的最终结果的占位符。它表示了一个暂未获得，但在未来即将获得的结果值。  
+---
+title: 手写Promise
+---
+Promise是异步编程的一种解决方案。 ES6将其纳入规范，提供了内置的Promise对象。Promise对象是异步操作的最终结果的占位符。它表示了一个暂未获得，但在未来即将获得的结果值。
+<!-- more -->  
 ## Promise状态
 Promise对象接受一个带有`resolve`和`reject`参数的函数，函数内部操作执行完毕后会调用`resolve`或`reject`函数将状态由pending转变为fulfilled或rejected。
 一个Promise对象一定处于以下三种状态之一：

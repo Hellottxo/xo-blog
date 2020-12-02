@@ -1,7 +1,8 @@
-# 算法题记录
-
+---
+title: 算法题记录
+---
 欢迎访问leetcode原题记录：[leetcode-records](http://xo.silenttt.top/leetcode-records)
-
+<!-- more -->
 ## 1. 洗牌算法
 
 ```js

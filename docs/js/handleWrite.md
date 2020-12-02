@@ -1,6 +1,9 @@
-# 手写系列
+---
+title: 手写系列
+---
 ## 1. 手写call
 `call()`用于指定this和一个或多个参数来调用函数。
+
 ```js
 Function.prototype.myCall = function(context, ...args) {
     // 1. 检测是否传入了thisArgs,没有则默认使用window

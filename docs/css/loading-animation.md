@@ -1,7 +1,9 @@
-# Loading动画
+---
+title: loading动画
+---
 
 点击即可跳转至源码，欢迎star⭐️
-
+<!-- more -->
 <ClientOnly>
   <loading-layout/>
 </ClientOnly>
