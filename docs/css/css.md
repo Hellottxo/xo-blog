@@ -3,6 +3,15 @@ title: css基础
 ---
 总结一些常见css问题。
 <!-- more -->
+## CSS盒模型
+盒模型分为：标准盒模型`box-sizing: content-box;`和怪异盒模型(IE)`box-sizing: border-box`。
+区别：
+- 标准盒模型的宽高 = 内容宽高
+- 怪异盒模型的宽高 = 内容宽高 + padding + border
+
+## offsetHeight/offsetWidth、clientHeight/clientWidth
+- offsetHeight、offsetWidth包含了border、padding、content
+- clientHeight、clientWidth包含了padding、content
 
 ## BFC 块级格式上下文
 块格式化上下文（Block Formatting Context，BFC） 是Web页面的可视CSS渲染的一部分，**是一个独立的渲染区域**。这个区域内部元素不受外部影响，反之亦然。
@@ -20,4 +29,12 @@ title: css基础
   - `column-count: 不为auto`或`column-width: 不为auto`
 
 BFC的特性：
-- 
+- 同一个BFC下子元素的margin会发生重叠
+- BFC不会与浮动元素重叠
+- 计算BFC高度时，包含浮动元素的高度
+
+应用：
+- 自适应两栏布局
+- 清除浮动
+
+## 伪类和伪元素
