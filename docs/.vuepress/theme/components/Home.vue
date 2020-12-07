@@ -230,7 +230,6 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 0 0 1rem;
     padding-top: 5rem;
   }
 
@@ -241,8 +240,7 @@ export default {
     background: $accentColor;
     color: #fff;
     padding: 0.5rem 0.6rem;
-    margin: 0.2rem;
-    transition: background-color 0.1s ease;
+    margin 0
     box-sizing: border-box;
     box-shadow: 0px 0px 5px 1px #00000047;
     cursor: pointer;
@@ -274,19 +272,21 @@ export default {
   }
 
   .text {
-    border-radius: 0.5rem;
+    font-size: 1.2rem;
     transition: all 0.3s;
     flex-basis: 15rem;
     flex-grow: 1;
     margin: 1.5rem;
     position: relative;
     background: #fff;
-    padding: 1rem;
+    padding: 1.5rem;
     box-shadow: 2px 2px 12px 2px #F5F5F5;
 
     a {
       display: block;
-      margin: 1rem 0;
+      &:hover {
+        color lighten($accentColor, 20%)
+      }
     }
 
     &-footer {
@@ -294,14 +294,17 @@ export default {
       padding: 1rem 0;
       color: #9e9e9e;
       display: flex;
-      border-top: 1px dashed;
       justify-content: space-between;
       align-items: center;
     }
   }
 
+  .text:hover {
+    transform rotate(1deg)
+  }
+
   .text-selected {
-    background: $accentColor;
+    background: linear-gradient(45deg, $accentColor, lighten($accentColor, 20%));
 
     a {
       color: #fff;
