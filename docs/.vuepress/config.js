@@ -38,7 +38,8 @@ module.exports = {
         sidebarDepth: 3,
         children: [
           '/css/transform',
-          '/css/loading-animation'
+          '/css/loading-animation',
+          '/css/css'
         ],
       },
       {

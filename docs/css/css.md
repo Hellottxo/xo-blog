@@ -38,7 +38,126 @@ BFC的特性：
 - 清除浮动
 
 ## 伪类和伪元素
-- 伪类：选择器的一种，用于选择处于特定状态的元素，如`:hover`
-- 伪元素：创建一些不在文档树中的元素，并为其提添样式，如`::first-line`
+- 伪类：选择器的一种，用于选择处于特定状态的元素，如`:hover`、`:nth-child(n)`、`:nth-of-type(n)`
+- 伪元素：创建一些不在文档树中的元素，并为其提添样式，如`::first-line`、`::before`，一个选择器中只能使用一个伪元素，伪元素必须紧跟在语句中的简单选择器/基础选择器之后
 
-## 两栏自适应布局
+## 一栏固定，一栏自适应布局
+
+1. `float` + BFC
+利用**BFC不会与浮动元素重叠**的特性
+```html
+<style>
+.left {
+  float: left;
+  width: 300px;
+  height: 100%;
+  background: pink;
+}
+.right {
+  display: flow-root;
+  height: 100%;
+  background: purple;
+}
+</style>
+<div>
+  <div class="left"></div>
+  <div class="right"></div>
+</div>
+```
+
+2. `flex`
+```html
+<style>
+.container {
+  display: flex;
+  height: 100%;
+}
+.left {
+  width: 300px;
+  height: 100%;
+  background: pink;
+}
+.right {
+  height: 100%;
+  background: purple;
+  flex: 1;
+}
+</style>
+<div class="container">
+  <div class="left"></div>
+  <div class="right"></div>
+</div>
+```
+
+3. `table-cell`
+`table-layout: fixed`表示列宽由表格宽度和列宽度设定
+```html
+<style>
+.container {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  height: 100%;
+}
+.left {
+  width: 300px;
+  background: pink;
+  display: table-cell;
+}
+.right {
+  background: purple;
+  display: table-cell
+}
+</style>
+<div class="container">
+  <div class="left"></div>
+  <div class="right"></div>
+</div>
+```
+
+4. `position` + `margin`
+```html
+<style>
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.left {
+  position: absolute;
+  width: 100px;
+  height: 100%;
+  background: pink;
+}
+
+.right {
+  margin-left: 100px;
+  height: 100%;
+  background: purple;
+}
+</style>
+<div class="container">
+  <div class="left"></div>
+  <div class="right"></div>
+</div>
+```
+
+## 水平居中
+1. 行内元素：`text-align: center`
+2. 宽度确定的块级元素
+  - `margin: 0 auto`
+  - `margin: -width/2`
+3. 宽度未知的块级元素
+  - `display: flex; justify-content: center;`
+  - `display: inline-block; text-align: center;`
+
+## 垂直居中
+- 行内元素： `vertical-align: middle`
+- 设置`line-height`
+- `display: flex; align-items: center`
+- 父级`display: flex;`，子级`margin: auto`
+
+## 一些自检小问题🤔
+1. 实现一个垂直居中的`div`，左右距窗口边界`10px`，高度始终为宽度的一半，并解释一下原理
+2. 伪类和伪元素的区别，你常用的伪类和伪元素有哪些？
+3. 如何选中`div`下的第n个`<p>`标签(`div`下不止有`<p>`标签)
