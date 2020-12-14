@@ -1,6 +1,6 @@
 <template>
   <main class="home" aria-labelledby="main-title">
-    <header class="hero">
+    <section class="hero">
       <h1 v-if="data.heroText !== null" id="main-title">
         <p class="title">
           X
@@ -13,7 +13,8 @@
           */
         </p>
       </h1>
-    </header>
+      <div class="bottom-notice">V</div>
+    </section>
 
     <div class="content-container">
       <div class="tag-group">
@@ -36,7 +37,7 @@
           <NavLink :item="item"/>
           <span class="excerpt" v-html="item.excerpt">{{item.excerpt}}</span>
           <div class="text-footer">
-            <span>{{item.lastUpdated}}</span>
+            <span>{{item.lastUpdated}} 🕤</span>
           </div>
         </div>
       </transition-group>
@@ -151,34 +152,27 @@ export default {
   position: relative;
   height: 100vh;
 
-  @keyframes water-spin {
-    100% {
-      transform: rotate(calc(var(--spin-angle) + 360deg));
-    }
-  }
-
   .hero {
     text-align: center;
     position: relative;
-    z-index: 2;
+    background: #FAFAFA;
+    z-index: 20;
     height: 100vh;
     display: flex;
     flex-direction: column;
 
-    img {
-      max-width: 100%;
-      max-height: 280px;
-      display: block;
-      margin: 3rem auto 1.5rem;
+    .bottom-notice {
+      font-size 20px
+      transform scaleY(0.5)
+      animation trangle 0.8s infinite alternate-reverse
     }
 
-    img:hover {
-      animation: wave-spin 2s linear infinite;
-    }
-
-    @keyframes wave-spin {
+    @keyframes trangle {
+      0% {
+        transform scaleY(0.5) translateY(-8px);
+      }
       100% {
-        transform: rotate(360deg);
+        transform scaleY(0.5) translateY(8px);
       }
     }
 
@@ -222,7 +216,6 @@ export default {
 
   .content-container {
     min-height: 100vh;
-    background: #f1f5f9;
     display: flow-root;
   }
 
@@ -280,7 +273,8 @@ export default {
     position: relative;
     background: #fff;
     padding: 1.5rem;
-    box-shadow: 2px 2px 12px 2px #F5F5F5;
+    box-shadow: 2px 2px 12px 2px #EEEEEE;
+    border-radius: 8px;
 
     a {
       display: block;
@@ -304,11 +298,7 @@ export default {
   }
 
   .text-selected {
-    background: linear-gradient(45deg, $accentColor, lighten($accentColor, 20%));
-
-    a {
-      color: #fff;
-    }
+    border 1px dashed
   }
 
   .features {

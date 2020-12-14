@@ -5,9 +5,13 @@
     @touchstart="onTouchStart"
     @touchend="onTouchEnd"
   >
+
+    <Home v-if="$page.frontmatter.home" />
+
     <Navbar
       v-if="shouldShowNavbar"
       @toggle-sidebar="toggleSidebar"
+      style="z-index: 10"
     />
 
     <div
@@ -27,10 +31,8 @@
       </template>
     </Sidebar>
 
-    <Home v-if="$page.frontmatter.home" />
-
     <Page
-      v-else
+      v-if="!$page.frontmatter.home"
       :sidebar-items="sidebarItems"
     >
       <template #top>
