@@ -180,7 +180,7 @@ export default {
       font-size: 3rem;
       display: flex;
       justify-content: center;
-      height: 100vh;
+      height: 95vh;
       align-items: center;
       margin: 0;
       flex-direction: column;
@@ -275,6 +275,7 @@ export default {
     padding: 1.5rem;
     box-shadow: 2px 2px 12px 2px #EEEEEE;
     border-radius: 8px;
+    border 2px dashed
 
     a {
       display: block;
@@ -298,7 +299,7 @@ export default {
   }
 
   .text-selected {
-    border 1px dashed
+    border 2px dashed #ff5722
   }
 
   .features {

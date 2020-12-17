@@ -136,12 +136,12 @@ TLS全称为Transfer Layer Security，安全传输层协议，是SSL3.0的后续
 ### 证书验证流程
 ![CA](../assets/validateCA.jpg)
 
-## Q&A
-- http报文如何分割header和body？
-- 常用的请求头？
-- 常用的响应码？
-- GET与POST的区别？
-- 304是什么情况下使用的？
-- http和https的区别？
-- 详述一下https的流程？
-- 如何验证证书？
+## Question
+1. http报文如何分割header和body？
+2. 常用的请求头？
+3. 常用的响应码？
+4. GET与POST的区别？
+5. 304是什么情况下使用的？
+6. http和https的区别？
+7. 详述一下https的流程？
+8. 如何验证证书？
