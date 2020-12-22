@@ -14,3 +14,31 @@ a.sidebar-link.active {
   color: $highlightColor;
   border-left-color: $highlightColor;
 }
+
+// 滚动条整体样式
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+// 滚动条内部滑块
+*::-webkit-scrollbar-thumb {
+  border-radius:4px
+  background-color: #efefef;
+  transition: background-color 0.3s;
+}
+
+// 鼠标悬停滚动条内部滑块
+*::-webkit-scrollbar-thumb:hover {
+  background: #efefef;
+}
+
+// 滚动条内部轨道
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+// 滚动条右下角小方块
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}

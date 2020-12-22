@@ -28,16 +28,12 @@
       </div>
 
       <transition-group name="list-complete" tag="div" class="text-group">
-        <div
-          v-for="(item, index) in selectItems.list"
-          class="text"
-          :key="item.link"
-          :class="{'text-selected': index < selectItems.selectCount}"
-        >
+        <div v-for="(item, index) in selectItems.list" class="text" :key="item.link">
           <NavLink :item="item"/>
           <span class="excerpt" v-html="item.excerpt">{{item.excerpt}}</span>
           <div class="text-footer">
-            <span>{{item.lastUpdated}} 🕤</span>
+            <span>🔖{{item.category}}</span>
+            <span>⌛️{{item.lastUpdated}}</span>
           </div>
         </div>
       </transition-group>
@@ -103,24 +99,30 @@ export default {
     selectItems() {
       const selectItems = [];
       const reg = /\/.*?\//g;
-      const otherItems = [];
+      const { sidebar } = this.$themeConfig;
       this.$site.pages.forEach(v => {
         if (!v.title || v.title === "Home") return;
-        const obj = { text: v.title, link: v.path, lastUpdated: v.lastUpdated, excerpt: v.excerpt };
+        const match = v.path.match(reg)[0];
+        const obj = {
+          text: v.title,
+          link: v.path,
+          lastUpdated: v.lastUpdated,
+          excerpt: v.excerpt,
+          category:
+            (sidebar.find(e => e.key.includes(match.slice(1, -1))) || {})
+              .title || "--"
+        };
         if (this.selectTag === "all") {
-          otherItems.push(obj);
+          selectItems.push(obj);
           return;
         }
-        const match = v.path.match(reg)[0];
         if (match && match.includes(this.selectTag)) {
           selectItems.push(obj);
-        } else {
-          otherItems.push(obj);
         }
       });
       return {
         selectCount: selectItems.length,
-        list: [...selectItems, ...otherItems]
+        list: selectItems
       };
     }
   },
@@ -134,13 +136,19 @@ export default {
       const sloganLen = this.slogan.length;
       const taglineLen = this.data.tagline.length;
       let flag = (reverse && sloganLen !== 0) || sloganLen === taglineLen;
-      let time = flag ? 100 : 200
-      if ((!reverse && sloganLen === taglineLen - 1) || (reverse && sloganLen === 1)) {
+      let time = flag ? 100 : 200;
+      if (
+        (!reverse && sloganLen === taglineLen - 1) ||
+        (reverse && sloganLen === 1)
+      ) {
         time = 600;
       }
       const len = flag ? sloganLen - 1 : sloganLen + 1;
       this.slogan = this.data.tagline.slice(0, len);
-      this.sloganInterval = setTimeout(() => this.setSloganAnimation(flag), time);
+      this.sloganInterval = setTimeout(
+        () => this.setSloganAnimation(flag),
+        time
+      );
     }
   }
 };
@@ -150,7 +158,6 @@ export default {
 .home {
   display: block;
   position: relative;
-  height: 100vh;
 
   .hero {
     text-align: center;
@@ -162,17 +169,18 @@ export default {
     flex-direction: column;
 
     .bottom-notice {
-      font-size 20px
-      transform scaleY(0.5)
-      animation trangle 0.8s infinite alternate-reverse
+      font-size: 20px;
+      transform: scaleY(0.5);
+      animation: trangle 0.8s infinite alternate-reverse;
     }
 
     @keyframes trangle {
       0% {
-        transform scaleY(0.5) translateY(-8px);
+        transform: scaleY(0.5) translateY(-8px);
       }
+
       100% {
-        transform scaleY(0.5) translateY(8px);
+        transform: scaleY(0.5) translateY(8px);
       }
     }
 
@@ -204,12 +212,14 @@ export default {
       color: $accentColor;
       letter-spacing: 6px;
     }
+
     .slogan {
-      animation cursor 0.7s infinite alternate-reverse
+      animation: cursor 0.7s infinite alternate-reverse;
     }
+
     @keyframes cursor {
       100% {
-        opacity 0
+        opacity: 0;
       }
     }
   }
@@ -223,17 +233,17 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding-top: 5rem;
+    padding: 5rem 0 3rem 0;
   }
 
   .tag {
     font-size: 1rem;
-    width 100px
-    text-align center
+    width: 100px;
+    text-align: center;
     background: $accentColor;
     color: #fff;
     padding: 0.5rem 0.6rem;
-    margin 0
+    margin: 0;
     box-sizing: border-box;
     box-shadow: 0px 0px 5px 1px #00000047;
     cursor: pointer;
@@ -251,8 +261,10 @@ export default {
   }
 
   .text-group {
-    max-width: 50rem;
+    max-width: 80rem;
     margin: 1rem auto;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .excerpt * {
@@ -261,7 +273,8 @@ export default {
     overflow: hidden;
     font-size: 14px;
     color: #9E9E9E;
-    font-weight normal
+    font-weight: normal;
+    max-width: 38rem;
   }
 
   .text {
@@ -269,25 +282,26 @@ export default {
     transition: all 0.3s;
     flex-basis: 15rem;
     flex-grow: 1;
-    margin: 1.5rem;
     position: relative;
     background: #fff;
-    padding: 1.5rem;
+    padding: 1rem;
     box-shadow: 2px 2px 12px 2px #EEEEEE;
-    border-radius: 8px;
-    border 2px dashed
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     a {
       display: block;
+
       &:hover {
-        color lighten($accentColor, 20%)
+        color: lighten($accentColor, 20%);
       }
     }
 
     &-footer {
-      font-size: 0.5rem;
-      padding: 1rem 0;
-      color: #9e9e9e;
+      font-size: 14px;
+      padding: 1rem 0 0 0;
+      color: lighten($accentColor, 20%);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -295,11 +309,7 @@ export default {
   }
 
   .text:hover {
-    transform rotate(1deg)
-  }
-
-  .text-selected {
-    border 2px dashed #ff5722
+    transform: scale3d(.95, .9, 1);
   }
 
   .features {
