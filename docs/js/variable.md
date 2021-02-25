@@ -64,7 +64,7 @@ Js变量包含**基本类型**和**引用类型**。
 <details>
 <summary>点击查看答案</summary>
 
-`不同的对象在底层都表示为二进制，`typeof`会将二进制的前三位为0判断为`object`，而null用二进制表示全为0，因此将`null`错误的判断为`object`。
+`不同的变量在底层都表示为二进制，`typeof`会将二进制的前三位为0判断为`object`，而null用二进制表示全为0，因此将`null`错误的判断为`object`。
 
 </details>
 

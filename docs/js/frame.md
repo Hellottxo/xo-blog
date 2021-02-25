@@ -1,8 +1,8 @@
 ---
 title: Vue/React
 ---
-## 1. React和Vue的区别
 
+##  React和Vue的区别
 ### 相似之处
 1. 都使用Virtual DOM
 2. 都提供了响应式和组件化的视图组件
@@ -15,8 +15,29 @@ title: Vue/React
 4. Vue的更新粒度是组件级的，而React中某个组件状态发生变化时，会以该组件为根，重新渲染整个组件子树。
 5. Vue的响应式
 
-## 2. 为什么要使用Virtual DOM
+## 为什么要使用Virtual DOM
 
 通过模拟DOM结构，达到批量更新的效果，减少不必要的DOM操作，节约性能
 
+## 自检清单
 
+### Vue自检小问题
+
+1. 什么是MVVM？
+2. Vue框架的优点是什么？
+3. 讲述一下Vue的生命周期
+4. Vue组件之间是怎么传值的
+5. 为什么Vue中的data必须是一个函数
+6. v-if和v-show的区别
+7. computed和watch的区别
+8. $nextTick的作用
+9. v-for中key的作用
+10. Vue中双向绑定的原理
+11. 如何动态更新对象或数组的值
+12. 说说常用的事件修饰符
+13. Vue 如何获取 DOM 元素
+14. v-on 如何绑定多个事件
+15. Vue 初始化页面闪动问题如何解决
+16. Vue 如何清除浏览器缓存
+17. Vue-router 路由有哪些模式
+18. Vuex 是什么？有哪几种属性？
