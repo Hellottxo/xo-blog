@@ -21,12 +21,26 @@ title: Vue/React
 
 ## 自检清单
 
-### Vue自检小问题
+### Vue
 
 1. 什么是MVVM？
 2. Vue框架的优点是什么？
 3. 讲述一下Vue的生命周期
 4. Vue组件之间是怎么传值的
+<details>
+<summary>点击查看答案</summary>
+
+父子组件：
+1. 通过props传值
+2. $emit/$on
+3. 通过`provide/inject`依赖注入
+
+兄弟组件：
+1. eventbus
+2. vuex
+
+</details>
+
 5. 为什么Vue中的data必须是一个函数
 6. v-if和v-show的区别
 7. computed和watch的区别
@@ -40,4 +54,17 @@ title: Vue/React
 15. Vue 初始化页面闪动问题如何解决
 16. Vue 如何清除浏览器缓存
 17. Vue-router 路由有哪些模式
-18. Vuex 是什么？有哪几种属性？
+
+### Vuex
+1. Vuex 是什么？有哪几种属性？什么时候使用？
+<details>
+<summary>点击查看答案</summary>
+
+`Vuex`的官网上将它描述为一种 **状态管理模式** 。它采用集中式存储管理应用的所有组件的状态。
+
+其核心属性有：`state`、`getter`、`mutation`、`action`、`module`。
+
+使用场景：
+多个组件需要依赖或修改同一个状态时
+
+</details>
