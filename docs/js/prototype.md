@@ -35,4 +35,7 @@ Object.getPrototypeOf(instance) === instance.__proto__; // true
 ```js
 Object.getPrototypeOf(Object) === Function.prototype;
 Object.getPrototypeOf(Function) === Function.prototype;
+Function.prototype.constructor === Function
+Function.prototype.__proto__ === Object.prototype
+Object.prototype.__proto__ === null
 ```

@@ -109,7 +109,7 @@ instance.habbit.shift();
 anoterInstance.habbit; // ['tennis', 'read']
 instance.habbit; // ['read']
 ```
-组合继承利用了原项链和借用构造函数的优点，同时规避了二者的缺点。
+组合继承利用了原型链和借用构造函数的优点，同时规避了二者的缺点。
 ## 4. 原型式继承
 >以给定对象为原型，创建一个新对象。
 ES5中的`Object.create()`规范化了原型式继承。
@@ -122,7 +122,7 @@ const inheritObj = Object.create(obj);
 inheritObj.name; // Lisa
 inheritObj.name = 'Eli';
 inheritObj.name; // 'Eli'
-obj.name; //// 'Lisa'
+obj.name; // 'Lisa'
 ```
 让我们手写一个原型式继承：
 ```js

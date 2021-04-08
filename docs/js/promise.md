@@ -218,9 +218,9 @@ class Promise {
     static all = (list) => {
         return Promise((resolve, reject) => {
             const values = [];
-            values.forEach((item, i) => {
+            list.forEach((item, i) => {
                 if (item && typeof item.then === 'function') {
-                    item.then((res) => {
+                    item().then((res) => {
                         values[i] = res;
                         if (i === list.length) {
                             resolve(values);

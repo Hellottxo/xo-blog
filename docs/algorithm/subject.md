@@ -42,10 +42,11 @@ function isValid(s) {
     };
     const stack = [];
     for(let i = 0; i < len; i++) {
-        if (dict[s[i]]) {
-            stack.push(s[i]);
+      	const item = dict[s[i]];
+        if (item) {
+            stack.push(item);
         } else {
-            if (s[i] === dict[stack.slice(-1)]) {
+            if (s[i] === stack[stack.length - 1]) {
                 stack.pop();
             } else {
                 return false
