@@ -41,7 +41,6 @@ Function.prototype.myBind = function(context, ...defaultArgs) {
         // 使用了new操作符时，this指向其实例
         return self.call(this instanceof fn ? this : context, ...defaultArgs, ...args);
     }
-		fn.prototype = Object.create(this.prototype);
     return fn;
 }
 ```
@@ -82,13 +81,14 @@ function myinstanceof(target, origin) {
 ```js
 function debounce(func, wait) {
     let timer;
-    return (...args) => {
+    return function(...args) {
         if (timer) clearTimeout(timer);
+      	const self = this;
         const callNow = timer;
         timer = setTimeout(() => {
-            timer = null;
+            clearTimeout(timer);
+          	func.call(self, ...args);
         });
-        if (!callNow) func.apply(this, args);
     }
 }
 ```
@@ -97,10 +97,11 @@ function debounce(func, wait) {
 ```js
 function throttle(func, wait) {
     let previous = 0;
-    return (...args) => {
+    return function(...args) {
+      	const self = this;
         const now = Date.now();
         if (now - previous > wait) {
-            func.apply(this, args);
+            func.call(self, ...args);
             previous = now;
         }
     }
@@ -256,6 +257,22 @@ class mySet {
     forEach = (callbackFn, thisArg) => {
         thisArg = thisArg || this;
         this.value.forEach(callbackFn, thisArg);
+    }
+}
+```
+
+## 12. deepClone
+```js
+function deepClone(origin, map = new WeakMap()){
+    if (typeof origin === 'object') {
+        const rs = Array.isArray(origin) ? [] : {};
+        if (map.get(origin)) return map.get(origin);
+        for (let key in origin) {
+            rs[key] = deepClone(origin[key], map);
+        }
+        return rs;
+    } else{
+        return origin;
     }
 }
 ```

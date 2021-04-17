@@ -16,13 +16,13 @@ class Promise {
         this.state = 'pending';
         this.value = null;
         this.reason = null;
-        const resolve = (value) => {
+        const resolve = function(value) {
             if (this.state === 'pending') {
                 this.state = 'fulfilled';
                 this.value = value;
             }
         };
-        const reject = (reason) => {
+        const reject = function(reason) {
             if (this.state === 'pending') {
                 this.state = 'rejected';
                 this.reason = reason;
@@ -51,14 +51,14 @@ class Promise {
         ...
         this.resolveCallBacks = [];
         this.rejectCallBacks = [];
-        const resolve = (value) => {
+        const resolve = function(value) {
             if (this.state === 'pending') {
                 this.state = 'fulfilled';
                 this.value = value;
                 this.resolveCallBacks.forEach((fn) => fn());
             }
         };
-        const reject = (reason) => {
+        const reject = function(reason) {
             if (this.state === 'pending') {
                 this.state = 'rejected';
                 this.reason = reason;
@@ -66,7 +66,7 @@ class Promise {
             }
         };
     }
-    then = (onFulfilled, onRejected) => {
+    function then(onFulfilled, onRejected) {
         if (this.state === 'fulfilled') {
             onFulfilled(this.value);
         }
@@ -98,7 +98,7 @@ class Promise {
     constructor(executor) {
         ...
     }
-    resolvePromise = (promise, x, resolve, reject) => {
+    function resolvePromise (promise, x, resolve, reject) {
         // 如果promise和x是同一个对象，则发生了循环调用，调用reject函数，并抛出一个TypeError
         if (promise === x) {
             return reject(new TypeError('Chaining cycle detected for promise'));
@@ -134,7 +134,7 @@ class Promise {
             resolve(x);
         }
     }
-    then = (onFulfilled, onRejected) => {
+    function then(onFulfilled, onRejected) {
         const promise2 = new Promise((resolve, reject) => {
             if (this.state === 'fulfilled') {
                 const x = onFulfilled(this.value);
@@ -199,14 +199,14 @@ class Promise {
     constructor(executor) {
         this.resolveCallBacks = [];
         this.rejectCallBacks = [];
-        const resolve = (value) => {
+        const resolve = function(value) {
             if (this.state === 'pending') {
                 this.state = 'fulfilled';
                 this.value = value;
                 this.resolveCallBacks.forEach((fn) => fn());
             }
         };
-        const reject = (reason) => {
+        const reject = function(reason) {
             if (this.state === 'pending') {
                 this.state = 'rejected';
                 this.reason = reason;
@@ -215,7 +215,7 @@ class Promise {
         };
     }
 
-    static all = (list) => {
+    static all = function (list) {
         return Promise((resolve, reject) => {
             const values = [];
             list.forEach((item, i) => {
@@ -233,7 +233,7 @@ class Promise {
         })
     }
 
-    resolvePromise = (promise, x, resolve, reject) => {
+    function resolvePromise (promise, x, resolve, reject) {
         if (promise === x) {
             return reject(new TypeError('Chaining cycle detected for promise'));
         }
@@ -263,7 +263,7 @@ class Promise {
             resolve(x);
         }
     }
-    then = (onFulfilled, onRejected) => {
+    function then = (onFulfilled, onRejected) {
         const promise2 = new Promise((resolve, reject) => {
             if (this.state === 'fulfilled') {
                 const x = onFulfilled(this.value);

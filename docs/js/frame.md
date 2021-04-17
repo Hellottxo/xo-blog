@@ -25,6 +25,7 @@ title: Vue/React
 ### Vue
 
 1. 什么是MVVM？
+
 <details>
 <summary>点击查看答案</summary>
 
@@ -32,7 +33,9 @@ MVVM是model-view-viewmodel的缩写，是前端的一种架构模式。view层�
 在view层中进行dom操作导致数据发生变化时，viewmodel响应操作并将数据同步到model层；model层数据发生变化时，view层的数据也会发生相应的变化。
 
 </details>
+
 2. Vue框架的优点是什么？
+
 <details>
 <summary>点击查看答案</summary>
 
@@ -43,23 +46,26 @@ MVVM是model-view-viewmodel的缩写，是前端的一种架构模式。view层�
 ...
 
 </details>
+
 3. 讲述一下Vue的生命周期
 4. Vue组件之间是怎么传值的
+
 <details>
 <summary>点击查看答案</summary>
 
-父子组件：
-1. 通过props传值
-2. $emit/$on
-3. 通过`provide/inject`依赖注入
-
-兄弟组件：
-1. eventbus
-2. vuex
+    父子组件：
+    1. 通过props传值
+    2. $emit/$on
+    3. 通过`provide/inject`依赖注入
+    
+    兄弟组件：
+    1. eventbus
+    2. vuex
 
 </details>
 
 5. 为什么Vue中的data必须是一个函数
+
 <details>
 <summary>点击查看答案</summary>
 
@@ -68,7 +74,9 @@ MVVM是model-view-viewmodel的缩写，是前端的一种架构模式。view层�
 组件为可复用的Vuew实例时，data如果为对象，组件内对data内数据的改动会相互影响。
 
 </details>
+
 6. v-if和v-show的区别
+
 <details>
 <summary>点击查看答案</summary>
 
@@ -79,34 +87,43 @@ MVVM是model-view-viewmodel的缩写，是前端的一种架构模式。view层�
 因此，内容频繁切换的情况使用`v-show`，条件改变较少时使用`v-if`。
 
 </details>
+
 7. computed和watch的区别
 <details>
 <summary>点击查看答案</summary>
 
 1. 使用场景上：`computed`是计算属性，适用于有多个依赖的情况；而`watch`则是侦听属性，负责响应某项数据的变动。
 2. 使用方式上：`computed`和`watch`都可以在Vue实例中作为属性使用，除此之外，`watch`还支持命令式调用`vm.$watch`。
+3. 源码上：`computed`本质上是有`watcher`，也就是`watch`的底层实现而实现的。
 
 `vm.$watch(expOfFn, cb, option)`支持传入三个参数，最后一个参数中有两个属性：imddiate、deep。其中immediate表示将以当前expOfFn值执行一次回调函数，deep表示监听对象内部属性的变动。
 `vm.$watch` return一个取消观察的函数，可以通过执行这个函数，停止触发回调。
 
 </details>
+
 8. Vue.nextTick的作用
+
 <details>
 <summary>点击查看答案</summary>
 
 为了避免不必要的计算和渲染，Vue的数据是异步更新的，`Vue.nextTick`支持在DOM更新后立即获取到更新后的DOM。比如在created中，对DOM的操作需要放入`Vue.nextTick`中，没有提供callback时，`Vue.nextTick`返回一个promise对象。
 
 原理，从事件循环的角度讲。
+
 </details>
+
 9. v-for中key的作用
+
 <details>
 <summary>点击查看答案</summary>
 
 Vue组件的node diff，会通过key及其他参数来对比是否同一个节点，当新旧节点为同一个节点时，会复用旧节点以此节约性能。
 
 </details>
+
 10. Vue中双向绑定的原理
 11. 如何动态更新对象或数组的值
+
 <details>
 <summary>点击查看答案</summary>
 
@@ -114,7 +131,9 @@ Vue组件的node diff，会通过key及其他参数来对比是否同一个节�
 数组：1. splice、push、unshift
 
 </details>
+
 12. 说说常用的事件修饰符
+
 <details>
 <summary>点击查看答案</summary>
 - .stop
@@ -125,25 +144,42 @@ Vue组件的node diff，会通过key及其他参数来对比是否同一个节�
 - .passive
 
 </details>
+
 13. Vue 如何获取 DOM 元素
+
 <summary>点击查看答案</summary>
 vm.$el
 </details>
+
 14. v-on 如何绑定多个事件
+
 <details>
 <summary>点击查看答案</summary>
 逗号分割
 </details>
+
 15. Vue 初始化页面闪动问题如何解决
-16. Vue 如何清除浏览器缓存
-17. Vue-router 路由有哪些模式
+
 <details>
 <summary>点击查看答案</summary>
-1. hash模式: window.location.hash
-2. history模式: histor.pushState
+
+v-cloak
+
 </details>
+
+16. Vue-router 路由有哪些模式
+
+<details>
+<summary>点击查看答案</summary>
+
+1. hash模式: window.location.hash
+2. history模式: history.pushState
+
+</details>
+
 ### Vuex
 1. Vuex 是什么？有哪几种属性？什么时候使用？
+
 <details>
 <summary>点击查看答案</summary>
 
