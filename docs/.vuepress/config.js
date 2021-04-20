@@ -69,6 +69,7 @@ module.exports = {
         sidebarDepth: 3,
         children: [
           '/computerNetwork/http',
+          '/computerNetwork/howNetWorkConnect'
         ]
       },
       {
