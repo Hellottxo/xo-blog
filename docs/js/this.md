@@ -135,7 +135,7 @@ console.log(window.name); // 'Mary'
 - `setName1()`是箭头函数，`this`继承于作用域链上层，即继承于实例对象`betty`
 - `setName2()`是直接调用方式调用的函数，再复习一遍：**函数作为函数直接调用时，非严格模式下，this的指向绑定到window；严格模式下，this的指向undefined。**
 
-2.  `bind()` 方法创建一个新的函数，在 `bind()` 被调用时，这个新函数的 `this` 被指定为 `bind()` 的第一个参数，而其余参数将作为新函数的参数，供调用时使用。与`apply()`和`call()`不同，`bind()`返回一个原函数的拷贝，并拥有指定的this值和初始参数。
+2.  `bind()` 方法创建一个新的函数，在 `bind()` 被调用时，这个新函数的 `this` 被指定为 `bind()` 的第一个参数，而其余参数将作为新函数的参数，供调用时使用。与`apply()`和`call()`不同，`bind()`返回一个原函数的拷贝，并拥有指定的this值和初始参数。⚠️`bind()`返回的原函数不具备原函数的prototype属性。
 
 ```js
 function setName(name) {

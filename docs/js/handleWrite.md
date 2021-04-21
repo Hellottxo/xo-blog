@@ -35,13 +35,14 @@ Function.prototype.myApply = function(context, args) {
 `bind()`返回一个拷贝的原函数，该函数指定了this及默认初始参数。
 ```js
 Function.prototype.myBind = function(context, ...defaultArgs) {
-    context = Object(context) || window;
-    const self = this;
-    function fn(...args) {
-        // 使用了new操作符时，this指向其实例
-        return self.call(this instanceof fn ? this : context, ...defaultArgs, ...args);
-    }
-    return fn;
+  if (typeof this !== 'function') throw Error('');
+  context = Object(context) || window;
+  const self = this;
+  const fn = function(...args) {
+    return self.apply(this instanceof fn ? this : context, [...defaultArgs, ...args]);
+  }
+  // bind后返回的函数不存在prototype
+  return Object.create(fn);
 }
 ```
 ## 4. 手写new
@@ -75,36 +76,44 @@ function myinstanceof(target, origin) {
         proto = Object.getPrototypeOf(proto);
     }
 }
+
 ```
 ## 6. 手写防抖函数
 防抖：触发事件指定时间后才执行函数，如果在指定时间内再次触发，则重新函数执行的时间。
 ```js
-function debounce(func, wait) {
-    let timer;
-    return function(...args) {
-        if (timer) clearTimeout(timer);
-      	const self = this;
-        const callNow = timer;
-        timer = setTimeout(() => {
-            clearTimeout(timer);
-          	func.call(self, ...args);
-        });
+function debounce(func, wait, immediate) {
+  let timer = null;
+  return function(...args) {
+    const context = this;
+    if (immediate) {
+      const callNow = !timer;
+      if (timer) clearTimeout(timer);
+      setTimeout(() => {
+        func.call(context, ...args);
+      }, wait)
+      if (callNow) func.call(context, ...args);
+    }else {
+      if (timer) clearTimeout(timer);
+      setTimeout(() => {
+        func.call(context, ...args);
+      })
     }
+  }
 }
 ```
 ## 7. 手写节流函数
 节流：连续的触发事件，但在指定时间内只触发一次。
 ```js
 function throttle(func, wait) {
-    let previous = 0;
-    return function(...args) {
-      	const self = this;
-        const now = Date.now();
-        if (now - previous > wait) {
-            func.call(self, ...args);
-            previous = now;
-        }
-    }
+  let timer = null;
+  return funtion(...args) {
+    const context = this;
+    if (timer) return;
+    timer = setTimeout(() => {
+      func.call(context, ...arg);
+      clearTimeout(timer);
+    }, wait);
+  }
 }
 ```
 ## 8. 利用reduce实现map/filter
@@ -262,17 +271,18 @@ class mySet {
 ```
 
 ## 12. deepClone
+
 ```js
-function deepClone(origin, map = new WeakMap()){
-    if (typeof origin === 'object') {
-        const rs = Array.isArray(origin) ? [] : {};
-        if (map.get(origin)) return map.get(origin);
-        for (let key in origin) {
-            rs[key] = deepClone(origin[key], map);
-        }
-        return rs;
-    } else{
-        return origin;
+function deepClone(target, map = new WeakMap()) {
+  if (typeof target === 'object') {
+    const res = Array.isArray(target) ? [] : {};
+    const item = map.get(target);
+    if (item) return item;
+    map.set(target, res);
+    for (let key in target) {
+      res[key] = deepClone(target[key], map);
     }
+  }
 }
 ```
+

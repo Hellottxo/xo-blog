@@ -46,7 +46,7 @@ instance.habbit.shift();
 const anotherInstance = new person2();
 anotherInstance.getHabbit(); // ['tennis']
 ```
-2. 无法在影响其他实例对象的同时，向超类型函数传参。  
+2. 无法在不影响其他实例对象的同时，向超类型函数传参。  
 ```js
 function person1(name) {
   this.name = name;

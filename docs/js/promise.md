@@ -14,18 +14,18 @@ Promise对象接受一个带有`resolve`和`reject`参数的函数，函数内�
 class Promise {
     constructor(executor) {
         this.state = 'pending';
-        this.value = null;
-        this.reason = null;
+        this.result = undefined;
+      	const self = this;
         const resolve = function(value) {
-            if (this.state === 'pending') {
-                this.state = 'fulfilled';
-                this.value = value;
+            if (self.state === 'pending') {
+                self.state = 'fulfilled';
+                self.result = value;
             }
         };
         const reject = function(reason) {
-            if (this.state === 'pending') {
-                this.state = 'rejected';
-                this.reason = reason;
+            if (self.state === 'pending') {
+                self.state = 'rejected';
+                self.result = reason;
             }
         };
         try {
@@ -51,18 +51,19 @@ class Promise {
         ...
         this.resolveCallBacks = [];
         this.rejectCallBacks = [];
+      	const self = this;
         const resolve = function(value) {
-            if (this.state === 'pending') {
-                this.state = 'fulfilled';
-                this.value = value;
-                this.resolveCallBacks.forEach((fn) => fn());
+            if (self.state === 'pending') {
+                self.state = 'fulfilled';
+                self.result = value;
+                self.resolveCallBacks.forEach((fn) => fn());
             }
         };
         const reject = function(reason) {
-            if (this.state === 'pending') {
-                this.state = 'rejected';
-                this.reason = reason;
-                this.rejectCallBacks.forEach((fn) => fn());
+            if (self.state === 'pending') {
+                self.state = 'rejected';
+                self.result = reason;
+                self.rejectCallBacks.forEach((fn) => fn());
             }
         };
     }
@@ -104,30 +105,23 @@ class Promise {
             return reject(new TypeError('Chaining cycle detected for promise'));
         }
         // 确保多次调用时，只有第一次生效
-        let called;
         if (['object', 'function'].includes(typeof x) && x !== null) {
             try {
                 let then = x.then;
                 // 如果then为function，则以x为context执行then
                 if (typeof then === 'function') {
-                    then.call(x, (y) => {
-                        if (called) return;
-                        called = true;
+                    then.call(x, (f) => {
                         // 继续解析
                         this.resolvePromise(promise, x, resolve, reject);
                     }, (r) => {
-                        if (called) return;
-                        called = true;
                         reject(r);
                     })
                 } else {
                     // 如果then不为function，执行resolve()
                     resolve(x);
                 }
-            } catch(e) {
-                if (called) return;
-                called = true;
-                reject(e);
+            } catch(err) {
+                reject(err);
             }
         }else {
             // x 既不是object，也不是fucntion时，执行resolve()
@@ -174,16 +168,19 @@ class Promise {
     static all = (list) => {
         return Promise((resolve, reject) => {
             const values = [];
-            values.forEach((item, i) => {
+            list.forEach((item, i) => {
                 if (item && typeof item.then === 'function') {
                     item.then((res) => {
                         values[i] = res;
-                        if (i === list.length) {
+                        if (i === list.length - 1) {
                             resolve(values);
                         }
                     }, reject)
                 } else {
                     values[i] = item;
+                    if (i === list.length - 1) {
+                      resolve(values);
+                    }
                 }
             })
         })
@@ -195,96 +192,139 @@ Promise就像一个装着程序的箱子，我们不需要关注程序在箱子�
 
 完整的promise实现代码如下：
 ```js
-class Promise {
-    constructor(executor) {
-        this.resolveCallBacks = [];
-        this.rejectCallBacks = [];
-        const resolve = function(value) {
-            if (this.state === 'pending') {
-                this.state = 'fulfilled';
-                this.value = value;
-                this.resolveCallBacks.forEach((fn) => fn());
-            }
-        };
-        const reject = function(reason) {
-            if (this.state === 'pending') {
-                this.state = 'rejected';
-                this.reason = reason;
-                this.rejectCallBacks.forEach((fn) => fn());
-            }
-        };
+class MyPromise {
+  constructor(excutor) {
+    this.state = 'pending';
+    this.result = undefined;
+    this.resolveCallbacks = [];
+    this.rejectCallbacks = [];
+    const self = this;
+    const resolve = function(value) {
+      if (self.state === 'pending') {
+        self.state = 'fullfilled';
+        self.result = value;
+        setTimeout(self.resolveCallbacks.forEach((fn) => fn()));
+      }
     }
-
-    static all = function (list) {
-        return Promise((resolve, reject) => {
-            const values = [];
-            list.forEach((item, i) => {
-                if (item && typeof item.then === 'function') {
-                    item().then((res) => {
-                        values[i] = res;
-                        if (i === list.length) {
-                            resolve(values);
-                        }
-                    }, reject)
-                } else {
-                    values[i] = item;
-                }
-            })
-        })
+    const reject = function(value) {
+      if (self.state === 'pending') {
+        self.state = 'rejected';
+        self.result = value;
+        setTimeout(self.rejectCallbacks.forEach((fn) => fn()));
+      }
     }
-
-    function resolvePromise (promise, x, resolve, reject) {
-        if (promise === x) {
-            return reject(new TypeError('Chaining cycle detected for promise'));
-        }
-        let called;
-        if (['object', 'function'].includes(typeof x) && x !== null) {
-            try {
-                let then = x.then;
-                if (typeof then === 'function') {
-                    then.call(x, (y) => {
-                        if (called) return;
-                        called = true;
-                        this.resolvePromise(promise, x, resolve, reject);
-                    }, (r) => {
-                        if (called) return;
-                        called = true;
-                        reject(r);
-                    })
-                } else {
-                    resolve(x);
-                }
-            } catch(e) {
-                if (called) return;
-                called = true;
-                reject(e);
-            }
+    try {
+      excutor(resolve, reject);
+    }catch(err) {
+      reject(err);
+    }
+  }
+  
+  resolvePromise(promise, x, resolve, reject) {
+    if (promise === x) {
+      reject(new TypeError('chaning cycle detected for promise!'));
+    }
+    if (['object', 'function'].includes(typeof x) && x !== null) {
+      try {
+        let then = x.then;
+        if (typeof then === 'function') {
+          then.call(x, (f) => {
+            this.resolvePromise(promise, f, resolve, reject);
+          }, (r) => {
+            reject(r);
+          })
         }else {
-            resolve(x);
+          resolve(x);
         }
+      }catch(err) {
+        reject(err);
+      }
+    } else {
+      resolve(x);
     }
-    function then = (onFulfilled, onRejected) {
-        const promise2 = new Promise((resolve, reject) => {
-            if (this.state === 'fulfilled') {
-                const x = onFulfilled(this.value);
-                this.resolvePromise(promise2, x, resolve, reject);
-            }
-            if (this.state === 'rejected') {
-                const x = onRejected(this.reason);
-                this.resolvePromise(promise2, x, resolve, reject);
-            }
-            if (this.state === 'pending') {
-                this.resolveCallBacks.push(() => {
-                    const x = onFulfilled(this.value);
-                    this.resolvePromise(promise2, x, resolve, reject);
-                });
-                this.rejectCallBacks.push(() => {
-                    const x = onRejected(this.reason);
-                    this.resolvePromise(promise2, x, resolve, reject);
-                });
-            }
+  }
+  
+  then(onFullfilled, onRejected) {
+    const promise2 = new MyPromise((resolve, reject) => {
+      if (this.state === 'pending') {
+        this.resolveCallbacks.push(() => {
+          const x = onFullfilled(this.result);
+          this.resolvePromise(promise2, x, resolve, reject);
         });
-        return promise2;
+        this.rejectCallbacks.push(() => {
+          const x = onFullfilled(this.result);
+          this.resolvePromise(promise2, x, resolve, reject);
+        });
+      }
+      if (this.state === 'fullfilled') {
+          const x = onFullfilled(this.result);
+					this.resolvePromise(promise2, x, resolve, reject);
+      }
+      if (this.state === 'rejected') {
+        	const x = onRejected(this.result);
+        	this.resolvePromise(promise2, x, resolve, reject);
+      }
+    });
+    return promise2;
+  }
+
+  catch(onRejectd) {
+    this.then(undefined, onRejectd);
+  }
+
+  static all(arrs) {
+    return new MyPromise((resolve, reject) => {
+      const arr = [];
+      let resolveNum = 0;
+      arrs.forEach((fn, i) => {
+        if (fn && typeof fn.then === 'function') {
+          fn.then((res) => {
+            arr[i] = res;
+            resolveNum++;
+            if (resolveNum === arr.length - 1) {
+              resolve(arr);
+              return;
+            }
+          }, reject);
+        } else {
+          arr[i] = fn;
+          resolveNum++;
+          if (resolveNum === arr.length - 1) {
+            resolve(arr);
+            return;
+          }
+        }
+      })
+    })
+  }
+}
+```
+## 来一个小问题
+实现一个批量请求函数 multiRequest(urls, maxNum)，要求如下：
+- 要求最大并发数 maxNum
+- 每当有一个请求返回，就留下一个空位，可以增加新的请求
+- 所有请求完成后，结果按照 urls 里面的顺序依次打出
+
+```js
+function requestLimit(urls, limit) {
+  return new Promise((resolve, reject) => {
+    const rs = [];
+    let count = 0;
+    let total = urls.length;
+    let resolveNum = 0;
+    function handler() {
+      let current = count++;
+      if (count >= total) return;
+      urls[current]().then((res) => {
+        rs[current] = res;
+        resolveNum++;
+        handler();
+        if (resolveNum === total) resolve(rs);
+      });
     }
+    while(count < limit) {
+      handler();
+    }
+  })
 }
 ```

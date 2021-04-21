@@ -187,7 +187,7 @@ v-cloak
 
 其核心属性有：`state`、`getter`、`mutation`、`action`、`module`。
 
-使用场景：
+使用场景： 
 多个组件需要依赖或修改同一个状态时
 
 </details>

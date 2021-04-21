@@ -63,9 +63,13 @@ function isValid(s) {
  * @param {number} n
  * @return {number}
  */
+const cache = {};
 function fibonnaci(n) {
     if (n === 0) return 0;
     if (n < 3) return 1;
-    return fibonnaci(n - 1) + fibonnaci(n - 2);
+  	if (cache[n]) return cache[n];
+  	const res = fibonnaci(n - 1) + fibonnaci(n - 2);
+  	cache[n] = res;
+    return res;
 }
 ```
