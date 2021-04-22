@@ -52,6 +52,16 @@ module.exports = {
         ],
       },
       {
+        title: 'vue',
+        key: 'vue',
+        collapsable: false,
+        sidebarDepth: 3,
+        children: [
+          '/vue/frame',
+          '/vue/lifecycle'
+        ]
+      },
+      {
         title: '浏览器',
         key: 'browser',
         collapsable: false,
