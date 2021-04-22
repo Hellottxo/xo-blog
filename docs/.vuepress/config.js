@@ -27,7 +27,6 @@ module.exports = {
           '/js/promise',
           '/js/implicitConversion',
           '/js/event',
-          '/js/frame',
           '/js/numInJs'
         ]
       },
@@ -52,13 +51,13 @@ module.exports = {
         ],
       },
       {
-        title: 'vue',
-        key: 'vue',
+        title: 'Vue',
+        key: 'Vue',
         collapsable: false,
         sidebarDepth: 3,
         children: [
-          '/vue/frame',
-          '/vue/lifecycle'
+          '/Vue/frame',
+          '/Vue/lifecycle'
         ]
       },
       {
@@ -79,7 +78,7 @@ module.exports = {
         sidebarDepth: 3,
         children: [
           '/computerNetwork/http',
-          '/computerNetwork/howNetWorkConnect'
+          '/computerNetwork/howNetworkConnect'
         ]
       },
       {

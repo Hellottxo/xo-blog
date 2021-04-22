@@ -1,9 +1,7 @@
 ---
 title: 从源码看生命周期LifeCycle
 ---
-## vue2
-
-版本：2.6.11
+## Vue2 版本：2.6.11
 
 ### 1. 初始化阶段
 
@@ -35,10 +33,15 @@ vm._update(vm._render(), hydrating)
 执行生命周期钩子函数`mounted`，进入运行阶段。
 
 ### 4. 运行阶段
+在初始化阶段，`Vue`中定义的`data`经过`observe`变成了响应式数据，数据被setter时，就会触发`dep.notify()`通知到各个`watcher`，调用各个`watcher`中的`update()`进行更新。
+让我们来看看数据更新的流程：
+```
+data -> setter -> dep.notify -> watcher.update -> view
+```
 
+事实上，触发`update()`后，会将当前`watcher`push进一个更新队列，再在`nextTick`中，通过id对更新队列进行优先级排列，然后遍历执行`watcher.run()`，即最后的更新操作。在执行`watcher.run()`之前，会调用`beforeUpdate`生命周期函数，等待更新队列遍历完毕后，再依更新相反顺序执行`updated`生命周期函数。
 
 
 话不多说，直接上图：
 
-![lifecylce](/Users/oucongying/Desktop/study/xo-blog/docs/assets/lifecycle.png)
-
+![lifecylce](../assets/lifecycle.png)
