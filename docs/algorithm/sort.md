@@ -108,7 +108,39 @@ title: 排序算法
     return quickSort(left).concat(middleValue, quickSort(right));
   }
   ```
+优化：
+
+```js
+function partition(arr, start, end) {
+  let middleIndex = ~~((start + end) / 2);
+  const middleValue = arr[middleIndex];
+  while(start !== end) {
+    while (arr[start] < middleValue && start < end) {
+      start++;
+    }
+    while (arr[end] > middleValue && start < end) {
+      end--;
+    }
+    if (start < end) {
+      [arr[start], arr[end]] = [arr[end], arr[start]];
+    }
+  }
+  return start;
+}
+function quickSort(arr, start, end) {
+  const left = start || 0;
+  const right = end || arr.length;
+  if(left >= right) return;
+  const index = partition(arr, left, right);
+  quickSort(arr, left, index - 1);
+  quickSort(arr, index + 1, right);
+}
+```
+
+
+
 ## 6. 希尔排序
+
 和归并排序类似，只是每次拆分数组并不是左右对称拆分，而是根据数组长度，以长度不断/2为增量进行比较。
 ```js
 function shellSort(arr) {
