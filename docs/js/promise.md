@@ -112,7 +112,7 @@ class Promise {
                 if (typeof then === 'function') {
                     then.call(x, (f) => {
                         // 继续解析
-                        this.resolvePromise(promise, x, resolve, reject);
+                        this.resolvePromise(promise, f, resolve, reject);
                     }, (r) => {
                         reject(r);
                     })
@@ -168,17 +168,20 @@ class Promise {
     static all = (list) => {
         return Promise((resolve, reject) => {
             const values = [];
+          	let resolveNum = 0;
             list.forEach((item, i) => {
                 if (item && typeof item.then === 'function') {
                     item.then((res) => {
                         values[i] = res;
-                        if (i === list.length - 1) {
+                      	resolveNum++;
+                        if (resolveNum === list.length - 1) {
                             resolve(values);
                         }
                     }, reject)
                 } else {
                     values[i] = item;
-                    if (i === list.length - 1) {
+                  	resolveNum++;
+                    if (resolveNum === list.length - 1) {
                       resolve(values);
                     }
                 }
@@ -328,3 +331,4 @@ function requestLimit(urls, limit) {
   })
 }
 ```
+
