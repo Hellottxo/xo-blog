@@ -57,7 +57,9 @@ module.exports = {
         sidebarDepth: 3,
         children: [
           '/Vue/frame',
-          '/Vue/lifecycle'
+          '/Vue/lifecycle',
+          '/Vue/computed',
+          '/Vue/desginPattern'
         ]
       },
       {
