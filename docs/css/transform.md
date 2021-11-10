@@ -6,9 +6,7 @@ title: 用css实现视差效果
 <!-- more -->
 让我们先上效果：当当当，鼠标在下面图片中滑动就可以看到哦😯
 
-<ClientOnly>
-  <peiki/>
-</ClientOnly>
+![](../assets/exmaple.gif)
 
 是不是看起来很简单？其实，真的，很简单！  
 

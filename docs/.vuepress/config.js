@@ -74,13 +74,13 @@ module.exports = {
         ]
       },
       {
-        title: '计算机网络',
-        key: 'computerNetwork',
+        title: '计算机基础',
+        key: 'computer',
         collapsable: false,
         sidebarDepth: 3,
         children: [
-          '/computerNetwork/http',
-          '/computerNetwork/howNetworkConnect'
+          '/computer/http',
+          '/computer/howNetworkConnect'
         ]
       },
       {
