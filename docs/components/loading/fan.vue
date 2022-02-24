@@ -1,6 +1,6 @@
 <template>
   <div class="fan">
-    <div v-for="item in 17" class="fan-bar" :style="{'--fan-index': item}" />
+    <div v-for="item in 17" class="fan-bar" :style="{ '--fan-index': item }" :key="item" />
     <div class="fan-circle" />
   </div>
 </template>

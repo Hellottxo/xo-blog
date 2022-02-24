@@ -1,10 +1,15 @@
 <template>
   <div class="container">
     <div class="cube-box">
-      <div class="cube" v-for="item in angle" :style="{'--rotate-angle': item}"/>
+      <div class="cube" v-for="item in angle" :style="{ '--rotate-angle': item }" :key="item" />
     </div>
     <div class="cube-box cube-box-inner">
-      <div class="cube-inner" v-for="item in angle" :style="{'--rotate-angle': item}"/>
+      <div
+        class="cube-inner"
+        v-for="item in angle"
+        :style="{ '--rotate-angle': item }"
+        :key="item"
+      />
     </div>
   </div>
 </template>
@@ -73,7 +78,8 @@ export default {
     transform: scale3d(0.5, 0.5, 0.5) var(--base-rotateX) rotateY(135deg);
   }
 }
-.cube, .cube-inner {
+.cube,
+.cube-inner {
   height: 100%;
   width: 100%;
   background: #ffc0cb45;

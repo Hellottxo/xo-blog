@@ -1,13 +1,14 @@
 <template>
   <div class="loading-container">
-    <div v-for="item in loading" class="wrap" @click="gotoTarget(item)">
-      <component :is="item"/>
+    <div v-for="item in comp" class="wrap" :key="item" @click="gotoTarget(item)">
+      <component :is="item" />
     </div>
   </div>
 </template>
 
-<script>
-const loading = [
+<script setup>
+import { defineAsyncComponent } from 'vue';
+const LOADING = [
   'waterWave',
   'beanEater',
   'clock',
@@ -29,29 +30,16 @@ const loading = [
   'flipball',
   'loadingCircle'
 ];
+const comp = LOADING.map((e) => defineAsyncComponent(() => import(`./loading/${e}.vue`)));
 
-export default {
-  name: 'loading-layout',
-  data() {
-    return {
-      loading: loading
-    };
-  },
-  components: (() => {
-    const map = {};
-    loading.forEach((e) => map[e] = () => import(`./loading/${e}.vue`));
-    return map;
-  })(),
-  methods: {
-    gotoTarget: (key) => {
-      console.log(key);
-      window.open(
-        `https://github.com/Hellottxo/xo-blog/blob/master/docs/.vuepress/components/loading/${key}.vue`,
-        "_blank"
-      );
-    }
-  }
+const gotoTarget = (key) => {
+  console.log(key);
+  window.open(
+    `https://github.com/Hellottxo/xo-blog/blob/master/docs/.vuepress/components/loading/${key}.vue`,
+    "_blank"
+  );
 };
+
 </script>
 
 <style scoped>

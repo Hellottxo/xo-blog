@@ -1,6 +1,6 @@
 <template>
   <div class="comments">
-    <div v-for="item in 3" class="dots" :style="{'--dots-index': item}" />
+    <div v-for="item in 3" class="dots" :style="{ '--dots-index': item }" :key="item" />
   </div>
 </template>
 

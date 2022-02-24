@@ -1,6 +1,6 @@
 <template>
   <div class="liquid">
-    <div class="wave" v-for="item in 3" :style="{'--wave-index': item}" />
+    <div class="wave" v-for="item in 3" :style="{ '--wave-index': item }" :key="item" />
   </div>
 </template>
 

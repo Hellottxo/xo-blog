@@ -1,15 +1,16 @@
 {
-  "version": "0.0.1",
+  "name": "xo-blog",
+  "version": "1.0.0",
   "description": "xo's blog",
   "main": "index.js",
-  "repository": "git@github.com:Hellottxo/xo-blog.git",
-  "author": "654720416@qq.com",
+  "author": "xo",
   "license": "MIT",
-  "dependencies": {
-    "vuepress": "^1.4.1"
-  },
   "scripts": {
-    "dev": "vuepress dev docs",
-    "build": "vuepress build docs"
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs"
+  },
+  "devDependencies": {
+    "vitepress": "^0.22.3"
   }
 }

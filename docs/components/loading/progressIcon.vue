@@ -1,7 +1,7 @@
 <template>
   <div class="progress-icon">
     <div class="progress-icon-bar">
-      <div class="stripe-bar" v-for="item in 7" />
+      <div class="stripe-bar" v-for="item in 7" :key="item" />
     </div>
     <div class="progress-icon-shadow" />
   </div>
@@ -36,7 +36,7 @@
   height: 15px;
   flex-shrink: 0;
   transform: skewX(-25deg);
-  animation: stripe-move .5s linear infinite;
+  animation: stripe-move 0.5s linear infinite;
 }
 
 .stripe-bar:first-child {
@@ -51,7 +51,7 @@
 
 .stripe-bar:nth-child(odd) {
   background: #fff;
-  opacity: .7;
+  opacity: 0.7;
 }
 
 .progress-icon-shadow {
@@ -61,7 +61,7 @@
   background: #696666;
   top: 50%;
   left: 17px;
-  opacity: .5;
+  opacity: 0.5;
   transform: skewX(30deg);
   transform-origin: center;
 }

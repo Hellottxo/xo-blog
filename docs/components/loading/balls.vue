@@ -1,8 +1,11 @@
 <template>
   <div class="container">
-    <div class="balls" v-for="item in 4" />
+    <div class="balls" v-for="item in 4" :key="item" />
   </div>
 </template>
+
+<script setup>
+</script>
 
 <style scoped>
 .container {

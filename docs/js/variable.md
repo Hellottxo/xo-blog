@@ -1,13 +1,11 @@
----
-title: 变量和类型
----
+# 变量和类型
 
-## 1.  Js数据类型
+## 1. Js 数据类型
 
 <details>
 <summary>点击查看答案</summary>
 
-Js变量包含**基本类型**和**引用类型**。
+Js 变量包含**基本类型**和**引用类型**。
 
 | 基本类型  | 引用类型                |
 | --------- | ----------------------- |
@@ -34,7 +32,7 @@ Js变量包含**基本类型**和**引用类型**。
 
 </details>
 
-## 3.  Js对象的底层数据结构是什么？
+## 3. Js 对象的底层数据结构是什么？
 
 <details>
 <summary>点击查看答案</summary>
@@ -43,15 +41,16 @@ Js变量包含**基本类型**和**引用类型**。
 
 </details>
 
-## 4.  Js判断数据类型方法
+## 4. Js 判断数据类型方法
 
 <details>
 <summary>点击查看答案</summary>
 
 1. `typeof`:
-   - 基本类型除null以外均可以准确判断
+
+   - 基本类型除 null 以外均可以准确判断
    - `typeof null === 'object'`
-   - 引用类型除function以外均判断为`object`
+   - 引用类型除 function 以外均判断为`object`
    - `typeof func === 'function'`
 
 2. `instanceof`: 判断实例对象上的原型链上是否能找到构造函数的原型属性，即判断某个对象是否是另一对象的实例。缺点：只能判断引用类型。
@@ -59,13 +58,13 @@ Js变量包含**基本类型**和**引用类型**。
 
 </details>
 
-## 5.  为什么`typeof null === 'object'`
+## 5. 为什么`typeof null === 'object'`
 
 <details>
 <summary>点击查看答案</summary>
 `不同的变量在底层都表示为二进制，`typeof`会将二进制的前三位为0判断为`object`，而null用二进制表示全为0，因此将`null`错误的判断为`object`。
 
-手动实现deepClone: [手写系列](./handleWrite)
+手动实现 deepClone: [手写系列](./handleWrite)
 
 </details>
 
@@ -85,7 +84,7 @@ Js变量包含**基本类型**和**引用类型**。
 <details>
 <summary>点击查看答案</summary>
 
-1. 小精度丢失原因：`Js`遵守JEEE 754规范，使用双精度存储，占用64bit。其中1bit表正负，52bit表示尾数，11bit表示指数。
+1. 小精度丢失原因：`Js`遵守 JEEE 754 规范，使用双精度存储，占用 64bit。其中 1bit 表正负，52bit 表示尾数，11bit 表示指数。
 2. `JavaScript`最大数字: `Number.MAX_VALUE`
 3. `JavaScript`最大安全数字: `Number.MAX_SAFE_INTEGER`
 4. 避免精度丢失的方法: 使用字符串传值
@@ -99,13 +98,15 @@ Js变量包含**基本类型**和**引用类型**。
 [点击查看答案](./implicitConversion)
 
 ## 9. `Symbol`类型在实际开发中的应用，手动实现一个简单的`Symbol`
+
 <details>
 <summary>点击查看答案</summary>
 
 应用:
-  1. 用于对象中的唯一key，防止对象中的某个key不小心被改写或覆盖。
-  2. 对象中以`Symbol`为key时，`for in`、`Json.stringify`等会跳过该属性，可以用于模拟私有属性。想要读取所有属性时，可以使用Reflect.ownKeys(obj)。
-  3. 消除魔法值。
+
+1. 用于对象中的唯一 key，防止对象中的某个 key 不小心被改写或覆盖。
+2. 对象中以`Symbol`为 key 时，`for in`、`Json.stringify`等会跳过该属性，可以用于模拟私有属性。想要读取所有属性时，可以使用 Reflect.ownKeys(obj)。
+3. 消除魔法值。
 
 手动实现: [手写系列](./handleWrite)
 

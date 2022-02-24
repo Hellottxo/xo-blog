@@ -4,7 +4,7 @@
       <div class="pages" />
     </div>
     <div class="right">
-      <div class="pages" v-for="item in 3" :style="{'--pages-index': item}" />
+      <div class="pages" v-for="item in 3" :style="{ '--pages-index': item }" :key="item" />
       <div class="pages" />
     </div>
   </div>
@@ -36,12 +36,11 @@
   transform-origin: left;
   z-index: calc(4 - var(--pages-index));
   --angle: calc(-150deg - var(--pages-index) * 30deg);
-  --time: calc((var(--pages-index) - 1) * .3s);
+  --time: calc((var(--pages-index) - 1) * 0.3s);
   animation: page-chg 1s linear var(--time) infinite;
 }
 
 @keyframes page-chg {
-
   100% {
     transform: perspective(120px) rotateY(var(--angle));
   }

@@ -4,8 +4,9 @@
       <div
         class="cube"
         v-for="(item, index) in angle"
-        :style="{'--rotate-angle': item}"
-      >{{index + 1}}</div>
+        :style="{ '--rotate-angle': item }"
+        :key="index"
+      >{{ index + 1 }}</div>
     </div>
   </div>
 </template>
@@ -66,7 +67,7 @@ export default {
   50% {
     transform: var(--rotate-angle) translateZ(20px);
   }
-  75%{
+  75% {
     transform: var(--rotate-angle) translateZ(40px);
   }
   100% {

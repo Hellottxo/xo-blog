@@ -1,14 +1,14 @@
 <template>
   <div class="matchman">
-    <div class="back"/>
-    <div class="head"/>
+    <div class="back" />
+    <div class="head" />
     <div class="up-body">
-      <div class="hand"/>
-      <div class="body"/>
-      <div class="hand"/>
+      <div class="hand" />
+      <div class="body" />
+      <div class="hand" />
     </div>
     <div class="down-body">
-      <div class="leg" v-for="item in 2"/>
+      <div class="leg" v-for="item in 2" :key="item" />
     </div>
   </div>
 </template>

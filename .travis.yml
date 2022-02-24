@@ -1,16 +1,16 @@
 language: node_js
 node_js:
-    - 10
-cache: yarn
+  - 16.13.0
+cache: pnpm
 install:
-    - yarn
+  - pnpm
 script:
-    - yarn build
+  - pnpm docs:build
 deploy:
-    provider: pages
-    skip_cleanup: true
-    local_dir: docs/.vuepress/dist
-    github_token: $GITHUB_TOKEN
-    keep_history: true
-    on:
-    branch: master
+  provider: pages
+  skip_cleanup: true
+  local_dir: docs/.vuepress/dist
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  on:
+  branch: vitepress

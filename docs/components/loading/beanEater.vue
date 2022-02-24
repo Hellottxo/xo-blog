@@ -5,7 +5,7 @@
       <div class="eater bottom" />
     </div>
     <div class="bean-container">
-      <div v-for="item in 4" class="bean" />
+      <div v-for="item in 4" class="bean" :key="item" />
     </div>
   </div>
 </template>

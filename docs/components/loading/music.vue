@@ -1,6 +1,6 @@
 <template>
   <div class="music">
-    <div v-for="item in 3" class="music-bar" :style="{'--music-index': item}" />
+    <div v-for="item in 3" class="music-bar" :style="{ '--music-index': item }" :key="item" />
     <div class="music-bar" style="--music-index: 2" />
     <div class="music-bar" style="--music-index: 1" />
   </div>
