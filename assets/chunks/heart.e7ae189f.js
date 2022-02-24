@@ -1,0 +1,1 @@
+import{_,o as a,c,p as o,h as d,g as t}from"../app.9bd94a15.js";const r={},s=e=>(o("data-v-8643d704"),e=e(),d(),e),n={class:"container"},i=s(()=>t("div",{class:"heart left"},null,-1)),l=s(()=>t("div",{class:"heart right"},null,-1)),p=[i,l];function h(e,u){return a(),c("div",n,p)}var f=_(r,[["render",h],["__scopeId","data-v-8643d704"]]);export{f as default};
