@@ -2,8 +2,6 @@ language: node_js
 node_js:
   - 16.13.0
 cache: yarn
-before_install:
-  - yarn config get registry
 install:
   - yarn
 script:
