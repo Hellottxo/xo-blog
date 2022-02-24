@@ -1,11 +1,11 @@
 language: node_js
 node_js:
   - 16.13.0
-cache: pnpm
+cache: npm
 install:
-  - pnpm
+  - npm
 script:
-  - pnpm docs:build
+  - npm docs:build
 deploy:
   provider: pages
   skip_cleanup: true
