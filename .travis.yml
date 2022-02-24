@@ -5,6 +5,7 @@ cache: yarn
 install:
   - yarn
 script:
+  - yarn config get registry
   - yarn docs:build
 deploy:
   provider: pages
