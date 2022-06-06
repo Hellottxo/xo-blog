@@ -17,6 +17,12 @@ export default defineConfig({
     ],
     sidebar: [
       {
+        text: '性能优化',
+        children: [
+          { text: '性能优化指标', link: "/performance/vitals" }
+        ]
+      },
+      {
         text: 'js',
         children: [
           { text: 'this的指向', link: "/js/this" },
