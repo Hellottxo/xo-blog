@@ -1,1 +1,0 @@
-import{_ as e,c as o,o as d,a as c}from"./app.9bd94a15.js";const f='{"title":"proxy","description":"","frontmatter":{},"headers":[],"relativePath":"js/Proxy.md","lastUpdated":1645672724000}',t={},r=c("",7),a=[r];function p(s,_,n,i,y,x){return d(),o("div",null,a)}var h=e(t,[["render",p]]);export{f as __pageData,h as default};

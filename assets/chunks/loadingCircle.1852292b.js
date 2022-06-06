@@ -1,0 +1,1 @@
+import{_ as c,o,c as s,p as _,i as a,h as t}from"../app.c43dc0b4.js";const d={},r=e=>(_("data-v-8619d87c"),e=e(),a(),e),n={class:"container"},i=r(()=>t("div",{class:"circle"},null,-1)),l=[i];function p(e,u){return o(),s("div",n,l)}var h=c(d,[["render",p],["__scopeId","data-v-8619d87c"]]);export{h as default};

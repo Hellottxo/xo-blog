@@ -1,0 +1,1 @@
+import{_ as e,o as t,c as o}from"./app.c43dc0b4.js";const f='{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"Devops/Monorepo.md","lastUpdated":1654519212000}',a={};function r(s,n,c,p,_,d){return t(),o("div")}var l=e(a,[["render",r]]);export{f as __pageData,l as default};

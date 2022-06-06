@@ -1,1 +1,0 @@
-import{_ as r,o as e,c as a,F as _,r as t,g as c}from"../app.9bd94a15.js";const n={},l={class:"container"};function o(d,i){return e(),a("div",l,[(e(),a(_,null,t(4,s=>c("div",{class:"balls",key:s})),64))])}var p=r(n,[["render",o],["__scopeId","data-v-c95a8a78"]]);export{p as default};

@@ -1,0 +1,1 @@
+import{_ as s,o,c as a,p as _,i as c,h as r}from"../app.c43dc0b4.js";const t={},d=e=>(_("data-v-538dacf0"),e=e(),c(),e),p={class:"progress"},n=d(()=>r("div",{class:"progress-square"},null,-1)),i=[n];function l(e,u){return o(),a("div",p,i)}var v=s(t,[["render",l],["__scopeId","data-v-538dacf0"]]);export{v as default};

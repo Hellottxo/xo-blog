@@ -1,0 +1,1 @@
+import{_ as a,o as s,c as t,F as n,r,h as _,n as c}from"../app.c43dc0b4.js";const o={},d={class:"comments"};function l(m,i){return s(),t("div",d,[(s(),t(n,null,r(3,e=>_("div",{class:"dots",style:c({"--dots-index":e}),key:e},null,4)),64))])}var p=a(o,[["render",l],["__scopeId","data-v-6e1e412b"]]);export{p as default};

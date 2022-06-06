@@ -1,0 +1,1 @@
+import{_ as s,o as a,c as r,F as t,r as _,h as n,n as c}from"../app.c43dc0b4.js";const l={},o={class:"liquid"};function d(i,v){return a(),r("div",o,[(a(),r(t,null,_(3,e=>n("div",{class:"wave",style:c({"--wave-index":e}),key:e},null,4)),64))])}var p=s(l,[["render",d],["__scopeId","data-v-c9e7ea94"]]);export{p as default};

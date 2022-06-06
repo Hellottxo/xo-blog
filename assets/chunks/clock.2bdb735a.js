@@ -1,1 +1,0 @@
-import{_ as c,o,c as s,p as _,h as a,g as t}from"../app.9bd94a15.js";const d={},n=e=>(_("data-v-732a7978"),e=e(),a(),e),r={class:"clock"},l=n(()=>t("div",{class:"clock-inner"},null,-1)),p=[l];function i(e,u){return o(),s("div",r,p)}var h=c(d,[["render",i],["__scopeId","data-v-732a7978"]]);export{h as default};

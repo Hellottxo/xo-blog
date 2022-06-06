@@ -1,1 +1,0 @@
-import{_ as a,o as e,c as s,F as t,r as n,g as _,n as c}from"../app.9bd94a15.js";const l={},o={class:"container"};function i(d,f){return e(),s("div",o,[(e(),s(t,null,n(5,(u,r)=>_("div",{class:"slice",style:c({"--slice-index":r})},null,4)),64))])}var p=a(l,[["render",i],["__scopeId","data-v-1498520f"]]);export{p as default};
