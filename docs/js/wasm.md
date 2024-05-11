@@ -344,7 +344,4 @@ const Module = {
 
 ![](../assets/wasm-6.png)
 
-### 3. ffmpeg + wasm 视频转三联屏
-
-在线地址体验地址：https://i.woa.com/mtr-tool/video-tool
 
