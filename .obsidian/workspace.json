@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/algorithm/doublePointers.md",
+                "file": "docs/Devops/欧聪颖-web前端简历.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/algorithm/doublePointers.md",
+                "file": "docs/Devops/欧聪颖-web前端简历.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/algorithm/doublePointers.md",
+                "file": "docs/Devops/欧聪颖-web前端简历.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/algorithm/doublePointers.md"
+                "file": "docs/Devops/欧聪颖-web前端简历.md"
               }
             }
           }
@@ -148,8 +148,17 @@
   },
   "active": "6328743ba31dc035",
   "lastOpenFiles": [
-    "2024-05-11.md",
+    "docs/Devops/resume.md",
+    "docs/Devops/pnpm.md",
+    "docs/Devops/欧聪颖-web前端简历.md",
+    "docs/Devops/Monorepo.md",
+    "docs/Devops/ssr.md",
+    "docs/js/async.md",
+    "docs/js/async.ms",
+    "docs/Devops/hydration.md",
+    "未命名",
     "docs/algorithm/doublePointers.md",
+    "2024-05-11.md",
     "docs/algorithm/1.两数之和.js"
   ]
 }

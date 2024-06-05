@@ -73,6 +73,21 @@ const hasCycle = (head) => {
 
 为了方便查找任何子数组 nums[i...j] 的和，我们可以使用一个前缀和数组 prefixSum，其中 prefixSum[0] = 0，prefixSum[i] = prefixSum[i-1] + nums[i-1] 对所有 i > 0。这样，任何子数组的和 sum(i, j)（即 nums[i] 到 nums[j] 的总和）可以通过 prefixSum[j+1] - prefixSum[i] 快速计算，而不需要重复加法运算。
 
+```js
+function buildPrefixSum(nums) {
+    const n = nums.length;
+    const prefix = new Array(n + 1).fill(0);
+    for (let i = 1; i <= n; i++) {
+        prefix[i] = prefix[i - 1] + nums[i - 1];
+    }
+    return prefix;
+}
+
+function rangeSum(prefix, l, r) {
+    return prefix[r + 1] - prefix[l];
+}
+```
+
 #### 可变大小的滑动窗口
 
 涉及到子字符串问题时，滑动窗口的大小通常是可变的。
